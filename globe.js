@@ -14,7 +14,7 @@
   const camera   = new THREE.PerspectiveCamera(42, innerWidth / innerHeight, 0.1, 1000);
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
 
-  renderer.setSize(innerWidth, innerHeight);
+  renderer.setSize(innerWidth, innerHeight, false); // false = don't override CSS; inset:0 handles full coverage
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.setClearColor(0x000000, 0); // fully transparent background
 
@@ -128,7 +128,7 @@
   window.addEventListener('resize', () => {
     camera.aspect = innerWidth / innerHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize(innerWidth, innerHeight);
+    renderer.setSize(innerWidth, innerHeight, false);
   });
 
   /* ── Animation loop ── */
