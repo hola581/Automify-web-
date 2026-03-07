@@ -52,7 +52,12 @@
   });
   const earth = new THREE.Mesh(earthGeo, earthMat);
   // Center at viewport bottom so exactly the top hemisphere is visible
-  earth.position.set(0, -3.65, 0);
+  function getGlobeY() {
+    // On portrait mobile, bring the globe higher so more is visible
+    return innerWidth < 768 ? -2.2 : -3.65;
+  }
+
+  earth.position.set(0, getGlobeY(), 0);
   scene.add(earth);
 
   /* ── Atmosphere glow (outer shell) ── */
@@ -79,7 +84,7 @@
     depthWrite: false,
   });
   const ring = new THREE.Mesh(ringGeo, ringMat);
-  ring.position.set(0, -3.65, 0);
+  ring.position.set(0, getGlobeY(), 0);
   ring.rotation.x = Math.PI / 2;
   scene.add(ring);
 
@@ -129,6 +134,10 @@
     camera.aspect = innerWidth / innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(innerWidth, innerHeight);
+    const y = getGlobeY();
+    earth.position.y      = y;
+    atmosphere.position.y = y;
+    ring.position.y       = y;
   });
 
   /* ── Animation loop ── */

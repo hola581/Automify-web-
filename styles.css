@@ -328,7 +328,7 @@ body {
 .hero {
   position: relative;
   z-index: 3;
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1233,7 +1233,7 @@ body {
 .ob-main {
   position: relative;
   z-index: 3;
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
