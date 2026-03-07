@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automify — Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+</head>
+<body>
+
+  <!-- Particle canvas -->
+  <canvas id="particles"></canvas>
+
+  <!-- Globe canvas -->
+  <canvas id="globe"></canvas>
+
+
+  <!-- ── NAVIGATION ── -->
+  <nav class="navbar">
+    <div class="nav-container">
+
+      <!-- Logo -->
+      <a href="index.html" class="nav-logo" aria-label="Automify">
+        <svg viewBox="0 0 5739.154 1046.592" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true">
+          <linearGradient id="logo-a" gradientUnits="userSpaceOnUse" x1=".5" x2="5738.025" y1="523.296" y2="523.296">
+            <stop offset="0" stop-color="#049bd3"/>
+            <stop offset=".628" stop-color="#39ff8e"/>
+          </linearGradient>
+          <linearGradient id="logo-b" gradientUnits="userSpaceOnUse" x1="0" x2="5739.154" y1="523.296" y2="523.296">
+            <stop offset="0" stop-color="#fff"/>
+            <stop offset="1" stop-color="#231f20"/>
+          </linearGradient>
+          <path d="m1505.387 711.411h59.524l-20.216 114.555c-26.955 2.245-66.263 6.739-94.335 6.739-117.924 0-171.834-31.445-171.834-122.418 0-17.968 2.249-37.059 6.739-60.645l49.412-283.016h-86.472l20.216-120.173h87.596l31.445-175.2h170.71l-30.321 175.2h117.924l-20.216 120.173h-119.049l-50.537 289.755c-1.124 6.739-2.249 12.353-2.249 17.967 0 26.955 16.851 37.063 51.661 37.063zm-906.282-305.477c0 14.598-1.124 30.321-4.49 47.167l-39.308 224.616c-8.987 48.296-13.477 85.355-13.477 111.186 0 16.847 2.241 29.2 5.614 37.063h-156.112c-10.108-14.602-14.602-31.445-14.602-48.292 0-5.618 1.124-13.477 2.249-23.586-44.922 56.155-95.463 83.11-186.432 83.11-121.294 0-192.047-61.773-192.047-159.481 0-121.294 81.986-177.445 223.492-189.802l135.895-11.229c40.429-3.369 68.508-17.971 68.508-55.031 0-42.677-34.818-66.263-84.234-66.263-61.769 0-89.845 28.076-99.953 77.492h-170.71c11.232-126.908 98.832-197.661 285.265-197.661 142.63 0 240.342 56.155 240.342 170.71zm-195.42 153.859c-7.859 10.108-31.445 14.602-61.769 17.971l-74.122 5.614c-64.018 5.618-95.463 30.324-95.463 74.126 0 39.308 28.076 65.139 79.741 65.139 78.616 0 134.767-56.155 146-126.912l5.614-35.939zm2899.718-386.338c70.753 0 110.061-41.557 110.061-99.957 0-40.429-32.569-72.998-87.604-72.998-70.753 0-110.061 41.553-110.061 99.953 0 40.432 32.569 73.002 87.604 73.002zm-2294.396 389.708c-14.602 87.604-64.014 135.895-130.277 135.895-46.047 0-69.629-25.831-69.629-73.002 0-8.984 1.124-20.216 2.249-30.324l61.766-349.279h-171.834l-67.38 382.973c-2.249 15.722-4.497 32.569-4.497 47.171 0 103.322 67.387 160.602 181.946 160.602 72.994 0 132.519-31.449 174.075-90.973l-13.477 79.741h162.847l101.074-579.513h-171.827l-55.034 316.71zm1929.417-327.939c-79.741 0-132.526 34.814-172.959 94.339-19.092-53.91-64.014-94.339-156.108-94.339-64.014 0-119.041 35.939-153.859 90.969l13.478-79.741h-162.847l-101.081 579.513h163.971l58.4-332.432c12.353-77.496 59.524-120.169 114.559-120.169 39.308 0 57.276 25.831 57.276 66.259 0 8.987-1.124 20.216-3.373 32.569l-61.766 353.773h163.971l58.4-332.432c12.353-77.496 59.524-120.169 114.551-120.169 40.433 0 57.276 25.831 57.276 66.259 0 10.108 0 20.216-2.241 32.569l-62.897 353.773h165.095l67.387-382.973c3.366-16.847 4.49-32.569 4.49-47.167 0-101.077-64.014-160.602-161.722-160.602zm1591.823 8.899 172.652 236.6 891.188-187.794-814.212 293.281-93.961 212.552c61.323-29.735 122.647-59.471 183.97-89.207l198.862 272.519 669.28-737.047-1207.778-.903zm-1431.248 581.843h171.834l101.074-579.513h-171.827zm907.429-130.277-53.91-449.236h-288.619l7.863-44.922c6.739-40.429 25.831-60.645 68.504-60.645h60.649l20.216-114.555c-25.831-2.249-77.492-6.739-113.434-6.739-132.526 0-185.304 57.276-207.769 186.432l-6.739 40.429h-88.721l-20.216 120.173h86.472l-79.733 459.34h170.702l80.865-459.34h119.049l19.679-116.978 98.231 528.026c2.249 14.598 4.497 29.2 4.497 42.678 0 61.769-31.445 105.567-105.571 105.567h-64.014l-21.341 120.173h64.014c158.357 0 252.699-62.894 362.76-268.418l285.261-531.221h-186.429l-212.267 449.236zm-1794.627-222.371c0 227.985-143.755 363.881-349.275 363.881-162.847 0-266.169-89.849-266.169-238.097 0-227.985 143.755-363.877 349.275-363.877 162.847 0 266.169 89.845 266.169 238.093zm-171.827 11.228c0-78.612-41.557-120.169-106.695-120.169-98.832 0-165.095 103.326-165.095 223.495 0 78.616 41.557 120.169 106.695 120.169 98.832 0 165.095-103.322 165.095-223.495z" fill="url(#logo-a)" stroke="url(#logo-b)" stroke-miterlimit="10"/>
+        </svg>
+      </a>
+
+      <!-- Nav links -->
+      <ul class="nav-links" role="list">
+        <li><a href="index.html" data-i18n="nav.about">About</a></li>
+        <li class="nav-dropdown">
+          <a href="solutions.html" class="nav-link-btn" aria-haspopup="true" aria-expanded="false">
+            <span data-i18n="nav.solutions">Solutions</span> <span class="chevron">▾</span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#customer-acquisition"   role="menuitem" data-i18n="nav.sol.ca">Customer Acquisition</a></li>
+            <li><a href="#sales"                  role="menuitem" data-i18n="nav.sol.sales">Sales</a></li>
+            <li><a href="#revenue"                role="menuitem" data-i18n="nav.sol.rev">Revenue</a></li>
+            <li><a href="#customer-retention"     role="menuitem" data-i18n="nav.sol.cr">Customer Retention</a></li>
+            <li><a href="#marketing"              role="menuitem" data-i18n="nav.sol.mkt">Marketing</a></li>
+            <li><a href="#talent-management"      role="menuitem" data-i18n="nav.sol.talent">Talent Management</a></li>
+            <li><a href="#operational-efficiency" role="menuitem" data-i18n="nav.sol.ops">Operational Efficiency</a></li>
+          </ul>
+        </li>
+        <li><a href="#" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+
+      <!-- Right actions -->
+      <div class="nav-actions">
+        <div class="nav-dropdown lang-dropdown">
+          <button class="lang-btn" aria-haspopup="true" aria-expanded="false">ENG <span class="chevron">▾</span></button>
+          <ul class="dropdown-menu lang-menu" role="menu">
+            <li><a href="#" role="menuitem" onclick="AutomifyI18n.setLanguage('en');return false;">English</a></li>
+            <li><a href="#" role="menuitem" onclick="AutomifyI18n.setLanguage('es');return false;">Español</a></li>
+          </ul>
+        </div>
+        <a href="#" class="btn-login" data-i18n="nav.login">Login</a>
+        <a href="#" class="btn-signup" data-i18n="nav.signup">Sign up</a>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Mobile navigation overlay (outside nav to avoid backdrop-filter stacking context) -->
+  <div class="nav-mobile-menu" id="nav-mobile-menu">
+    <ul class="nav-mobile-links">
+      <li><a href="index.html" data-i18n="nav.about">About</a></li>
+      <li><a href="solutions.html" data-i18n="nav.solutions">Solutions</a></li>
+      <li><a href="#" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+    <div class="nav-mobile-actions">
+      <a href="#" class="btn-login" data-i18n="nav.login">Login</a>
+      <a href="#" class="btn-signup" data-i18n="nav.signup">Sign up</a>
+    </div>
+  </div>
+
+
+  <!-- ── SOLUTIONS HERO ── -->
+  <section class="sol-hero">
+    <div class="sol-hero-inner">
+      <div class="promo-tag" data-i18n-html="sol.hero.tag">✦ &nbsp;Our Solutions</div>
+      <h1 class="sol-hero-title" data-i18n-html="sol.hero.title">Automation Built for<br>Every Corner of Your <em>Business</em></h1>
+      <p class="sol-hero-sub" data-i18n="sol.hero.sub">From winning new customers to managing your team — Automify puts intelligent automation to work across your entire organisation.</p>
+    </div>
+  </section>
+
+
+  <!-- ── SOLUTIONS GRID ── -->
+  <section class="sol-grid-section">
+    <div class="sol-grid">
+
+      <!-- 01 Customer Acquisition -->
+      <div class="sol-card" id="customer-acquisition">
+        <div class="sol-card-num">01</div>
+        <h3 class="sol-card-title" data-i18n="sol.c1.title">Customer Acquisition</h3>
+        <p class="sol-card-desc" data-i18n="sol.c1.desc">Drive growth with AI-powered tools designed to find, engage, and convert your ideal customers — without lifting a finger.</p>
+        <ul class="sol-features">
+          <li data-i18n="sol.c1.f1">Lead Generation</li>
+          <li data-i18n="sol.c1.f2">Personalised Outreach</li>
+          <li data-i18n="sol.c1.f3">Targeted Advertising</li>
+        </ul>
+      </div>
+
+      <!-- 02 Sales -->
+      <div class="sol-card" id="sales">
+        <div class="sol-card-num">02</div>
+        <h3 class="sol-card-title" data-i18n="sol.c2.title">Sales</h3>
+        <p class="sol-card-desc" data-i18n="sol.c2.desc">Supercharge your sales team with intelligent forecasting, automated proposals, and a pipeline that manages itself.</p>
+        <ul class="sol-features">
+          <li data-i18n="sol.c2.f1">Sales Forecasting</li>
+          <li data-i18n="sol.c2.f2">Automated Proposals</li>
+          <li data-i18n="sol.c2.f3">Pipeline Management</li>
+        </ul>
+      </div>
+
+      <!-- 03 Revenue -->
+      <div class="sol-card" id="revenue">
+        <div class="sol-card-num">03</div>
+        <h3 class="sol-card-title" data-i18n="sol.c3.title">Revenue</h3>
+        <p class="sol-card-desc" data-i18n="sol.c3.desc">Maximise every revenue stream with dynamic pricing models, real-time analytics, and automated growth strategies.</p>
+        <ul class="sol-features">
+          <li data-i18n="sol.c3.f1">AI-Driven Pricing Models</li>
+          <li data-i18n="sol.c3.f2">Revenue Analytics</li>
+          <li data-i18n="sol.c3.f3">Growth Optimisation</li>
+        </ul>
+      </div>
+
+      <!-- 04 Customer Retention -->
+      <div class="sol-card" id="customer-retention">
+        <div class="sol-card-num">04</div>
+        <h3 class="sol-card-title" data-i18n="sol.c4.title">Customer Retention</h3>
+        <p class="sol-card-desc" data-i18n="sol.c4.desc">Keep customers loyal and reduce churn with personalised loyalty programs and timely, automated follow-ups.</p>
+        <ul class="sol-features">
+          <li data-i18n="sol.c4.f1">Loyalty Programs</li>
+          <li data-i18n="sol.c4.f2">Churn Prediction</li>
+          <li data-i18n="sol.c4.f3">Automated Follow-ups</li>
+        </ul>
+      </div>
+
+      <!-- 05 Marketing -->
+      <div class="sol-card" id="marketing">
+        <div class="sol-card-num">05</div>
+        <h3 class="sol-card-title" data-i18n="sol.c5.title">Marketing</h3>
+        <p class="sol-card-desc" data-i18n="sol.c5.desc">Deliver hyper-personalised campaigns at scale — continuously testing, optimising, and adapting to your audience in real time.</p>
+        <ul class="sol-features">
+          <li data-i18n="sol.c5.f1">Personalised Campaigns</li>
+          <li data-i18n="sol.c5.f2">A/B Testing</li>
+          <li data-i18n="sol.c5.f3">Dynamic Content</li>
+        </ul>
+      </div>
+
+      <!-- 06 Talent Management -->
+      <div class="sol-card" id="talent-management">
+        <div class="sol-card-num">06</div>
+        <h3 class="sol-card-title" data-i18n="sol.c6.title">Talent Management</h3>
+        <p class="sol-card-desc" data-i18n="sol.c6.desc">Attract, onboard, and develop your best people with intelligent automation that handles the heavy lifting for HR.</p>
+        <ul class="sol-features">
+          <li data-i18n="sol.c6.f1">Recruitment Automation</li>
+          <li data-i18n="sol.c6.f2">Employee Onboarding</li>
+          <li data-i18n="sol.c6.f3">Performance Analytics</li>
+        </ul>
+      </div>
+
+      <!-- 07 Operational Efficiency — centred in last row -->
+      <div class="sol-card sol-card-last" id="operational-efficiency">
+        <div class="sol-card-num">07</div>
+        <h3 class="sol-card-title" data-i18n="sol.c7.title">Operational Efficiency</h3>
+        <p class="sol-card-desc" data-i18n="sol.c7.desc">Eliminate bottlenecks across invoicing, scheduling, and supply chain management with end-to-end process automation.</p>
+        <ul class="sol-features">
+          <li data-i18n="sol.c7.f1">Automated Invoicing</li>
+          <li data-i18n="sol.c7.f2">Task Scheduling</li>
+          <li data-i18n="sol.c7.f3">Supply Chain Optimisation</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ── CTA ── -->
+  <section class="sol-cta-section">
+    <div class="sol-cta-inner">
+      <h2 class="sol-cta-title" data-i18n-html="sol.cta.title">Ready to <em>Automate</em><br>Your Business?</h2>
+      <p class="sol-cta-sub" data-i18n="sol.cta.sub">Speak with an Automify expert and discover how our solutions can transform your operations from day one.</p>
+      <a href="https://calendly.com/hola-automify/30min" target="_blank" rel="noopener" class="btn-cta"><span data-i18n-html="sol.cta.btn">Speak to an Expert &nbsp;→</span></a>
+    </div>
+  </section>
+
+
+  <script src="i18n.js"></script>
+  <script src="globe.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

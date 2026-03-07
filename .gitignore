@@ -1,0 +1,11 @@
+# Dev-only files
+.claude/
+.streamlit/
+chat.py
+scraper.py
+transcripts/
+supabase/
+node_modules/
+.vercel/
+.DS_Store
+.vercel

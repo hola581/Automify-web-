@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automify — Get Your Free Website</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <!-- Supabase JS v2 -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <!-- jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- Particle canvas -->
+  <canvas id="particles"></canvas>
+
+  <!-- Globe canvas -->
+  <canvas id="globe"></canvas>
+
+
+  <!-- ── NAVIGATION ── -->
+  <nav class="navbar">
+    <div class="nav-container">
+
+      <!-- Logo -->
+      <a href="index.html" class="nav-logo" aria-label="Automify">
+        <svg viewBox="0 0 5739.154 1046.592" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true">
+          <linearGradient id="logo-a" gradientUnits="userSpaceOnUse" x1=".5" x2="5738.025" y1="523.296" y2="523.296">
+            <stop offset="0" stop-color="#049bd3"/>
+            <stop offset=".628" stop-color="#39ff8e"/>
+          </linearGradient>
+          <linearGradient id="logo-b" gradientUnits="userSpaceOnUse" x1="0" x2="5739.154" y1="523.296" y2="523.296">
+            <stop offset="0" stop-color="#fff"/>
+            <stop offset="1" stop-color="#231f20"/>
+          </linearGradient>
+          <path d="m1505.387 711.411h59.524l-20.216 114.555c-26.955 2.245-66.263 6.739-94.335 6.739-117.924 0-171.834-31.445-171.834-122.418 0-17.968 2.249-37.059 6.739-60.645l49.412-283.016h-86.472l20.216-120.173h87.596l31.445-175.2h170.71l-30.321 175.2h117.924l-20.216 120.173h-119.049l-50.537 289.755c-1.124 6.739-2.249 12.353-2.249 17.967 0 26.955 16.851 37.063 51.661 37.063zm-906.282-305.477c0 14.598-1.124 30.321-4.49 47.167l-39.308 224.616c-8.987 48.296-13.477 85.355-13.477 111.186 0 16.847 2.241 29.2 5.614 37.063h-156.112c-10.108-14.602-14.602-31.445-14.602-48.292 0-5.618 1.124-13.477 2.249-23.586-44.922 56.155-95.463 83.11-186.432 83.11-121.294 0-192.047-61.773-192.047-159.481 0-121.294 81.986-177.445 223.492-189.802l135.895-11.229c40.429-3.369 68.508-17.971 68.508-55.031 0-42.677-34.818-66.263-84.234-66.263-61.769 0-89.845 28.076-99.953 77.492h-170.71c11.232-126.908 98.832-197.661 285.265-197.661 142.63 0 240.342 56.155 240.342 170.71zm-195.42 153.859c-7.859 10.108-31.445 14.602-61.769 17.971l-74.122 5.614c-64.018 5.618-95.463 30.324-95.463 74.126 0 39.308 28.076 65.139 79.741 65.139 78.616 0 134.767-56.155 146-126.912l5.614-35.939zm2899.718-386.338c70.753 0 110.061-41.557 110.061-99.957 0-40.429-32.569-72.998-87.604-72.998-70.753 0-110.061 41.553-110.061 99.953 0 40.432 32.569 73.002 87.604 73.002zm-2294.396 389.708c-14.602 87.604-64.014 135.895-130.277 135.895-46.047 0-69.629-25.831-69.629-73.002 0-8.984 1.124-20.216 2.249-30.324l61.766-349.279h-171.834l-67.38 382.973c-2.249 15.722-4.497 32.569-4.497 47.171 0 103.322 67.387 160.602 181.946 160.602 72.994 0 132.519-31.449 174.075-90.973l-13.477 79.741h162.847l101.074-579.513h-171.827l-55.034 316.71zm1929.417-327.939c-79.741 0-132.526 34.814-172.959 94.339-19.092-53.91-64.014-94.339-156.108-94.339-64.014 0-119.041 35.939-153.859 90.969l13.478-79.741h-162.847l-101.081 579.513h163.971l58.4-332.432c12.353-77.496 59.524-120.169 114.559-120.169 39.308 0 57.276 25.831 57.276 66.259 0 8.987-1.124 20.216-3.373 32.569l-61.766 353.773h163.971l58.4-332.432c12.353-77.496 59.524-120.169 114.551-120.169 40.433 0 57.276 25.831 57.276 66.259 0 10.108 0 20.216-2.241 32.569l-62.897 353.773h165.095l67.387-382.973c3.366-16.847 4.49-32.569 4.49-47.167 0-101.077-64.014-160.602-161.722-160.602zm1591.823 8.899 172.652 236.6 891.188-187.794-814.212 293.281-93.961 212.552c61.323-29.735 122.647-59.471 183.97-89.207l198.862 272.519 669.28-737.047-1207.778-.903zm-1431.248 581.843h171.834l101.074-579.513h-171.827zm907.429-130.277-53.91-449.236h-288.619l7.863-44.922c6.739-40.429 25.831-60.645 68.504-60.645h60.649l20.216-114.555c-25.831-2.249-77.492-6.739-113.434-6.739-132.526 0-185.304 57.276-207.769 186.432l-6.739 40.429h-88.721l-20.216 120.173h86.472l-79.733 459.34h170.702l80.865-459.34h119.049l19.679-116.978 98.231 528.026c2.249 14.598 4.497 29.2 4.497 42.678 0 61.769-31.445 105.567-105.571 105.567h-64.014l-21.341 120.173h64.014c158.357 0 252.699-62.894 362.76-268.418l285.261-531.221h-186.429l-212.267 449.236zm-1794.627-222.371c0 227.985-143.755 363.881-349.275 363.881-162.847 0-266.169-89.849-266.169-238.097 0-227.985 143.755-363.877 349.275-363.877 162.847 0 266.169 89.845 266.169 238.093zm-171.827 11.228c0-78.612-41.557-120.169-106.695-120.169-98.832 0-165.095 103.326-165.095 223.495 0 78.616 41.557 120.169 106.695 120.169 98.832 0 165.095-103.322 165.095-223.495z" fill="url(#logo-a)" stroke="url(#logo-b)" stroke-miterlimit="10"/>
+        </svg>
+      </a>
+
+      <!-- Nav links -->
+      <ul class="nav-links" role="list">
+        <li><a href="index.html" data-i18n="nav.about">About</a></li>
+        <li class="nav-dropdown">
+          <a href="solutions.html" class="nav-link-btn" aria-haspopup="true" aria-expanded="false">
+            <span data-i18n="nav.solutions">Solutions</span> <span class="chevron">▾</span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="solutions.html#customer-acquisition"   role="menuitem" data-i18n="nav.sol.ca">Customer Acquisition</a></li>
+            <li><a href="solutions.html#sales"                  role="menuitem" data-i18n="nav.sol.sales">Sales</a></li>
+            <li><a href="solutions.html#revenue"                role="menuitem" data-i18n="nav.sol.rev">Revenue</a></li>
+            <li><a href="solutions.html#customer-retention"     role="menuitem" data-i18n="nav.sol.cr">Customer Retention</a></li>
+            <li><a href="solutions.html#marketing"              role="menuitem" data-i18n="nav.sol.mkt">Marketing</a></li>
+            <li><a href="solutions.html#talent-management"      role="menuitem" data-i18n="nav.sol.talent">Talent Management</a></li>
+            <li><a href="solutions.html#operational-efficiency" role="menuitem" data-i18n="nav.sol.ops">Operational Efficiency</a></li>
+          </ul>
+        </li>
+        <li><a href="#" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+
+      <!-- Right actions -->
+      <div class="nav-actions">
+        <div class="nav-dropdown lang-dropdown">
+          <button class="lang-btn" aria-haspopup="true" aria-expanded="false">ENG <span class="chevron">▾</span></button>
+          <ul class="dropdown-menu lang-menu" role="menu">
+            <li><a href="#" role="menuitem" onclick="AutomifyI18n.setLanguage('en');return false;">English</a></li>
+            <li><a href="#" role="menuitem" onclick="AutomifyI18n.setLanguage('es');return false;">Español</a></li>
+          </ul>
+        </div>
+        <a href="#" class="btn-login" data-i18n="nav.login">Login</a>
+        <a href="#" class="btn-signup" data-i18n="nav.signup">Sign up</a>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Mobile navigation overlay (outside nav to avoid backdrop-filter stacking context) -->
+  <div class="nav-mobile-menu" id="nav-mobile-menu">
+    <ul class="nav-mobile-links">
+      <li><a href="index.html" data-i18n="nav.about">About</a></li>
+      <li><a href="solutions.html" data-i18n="nav.solutions">Solutions</a></li>
+      <li><a href="#" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+    <div class="nav-mobile-actions">
+      <a href="#" class="btn-login" data-i18n="nav.login">Login</a>
+      <a href="#" class="btn-signup" data-i18n="nav.signup">Sign up</a>
+    </div>
+  </div>
+
+
+  <!-- ── ONBOARDING FORM ── -->
+  <main class="ob-main">
+
+    <!-- Progress dots -->
+    <div class="ob-progress" id="ob-progress">
+      <div class="ob-dot active" id="dot-1">1</div>
+      <div class="ob-connector"  id="conn-1"></div>
+      <div class="ob-dot"        id="dot-2">2</div>
+      <div class="ob-connector"  id="conn-2"></div>
+      <div class="ob-dot"        id="dot-3">3</div>
+      <div class="ob-connector"  id="conn-3"></div>
+      <div class="ob-dot"        id="dot-4">4</div>
+      <div class="ob-connector"  id="conn-4"></div>
+      <div class="ob-dot"        id="dot-5">5</div>
+    </div>
+
+    <!-- Step label -->
+    <p class="ob-step-label" id="ob-step-label">Step 1 of 5 &nbsp;—&nbsp; About Your Business</p>
+
+    <!-- Card -->
+    <div class="ob-card">
+
+      <!-- ── STEP 1 — About Your Business ── -->
+      <div class="ob-step active" id="step-1">
+        <h2 class="ob-step-title" data-i18n="ob.s1.title">About Your Business</h2>
+
+        <div class="ob-field">
+          <label for="business_name"><span data-i18n="ob.l.business_name">Business Name</span> <span class="ob-req">*</span></label>
+          <input type="text" id="business_name" class="ob-input" placeholder="e.g. Acme Studios" data-i18n-ph="ob.ph.business_name" autocomplete="organization">
+          <p class="ob-error" id="err-business_name" data-i18n-err="ob.err.business_name">Please enter your business name.</p>
+        </div>
+
+        <div class="ob-field">
+          <label for="industry"><span data-i18n="ob.l.industry">Industry</span> <span class="ob-req">*</span></label>
+          <select id="industry" class="ob-select">
+            <option value="" data-i18n="ob.ph.industry">Select your industry…</option>
+            <option>Technology</option>
+            <option>Health &amp; Wellness</option>
+            <option>Finance</option>
+            <option>E-Commerce / Retail</option>
+            <option>Food &amp; Hospitality</option>
+            <option>Professional Services</option>
+            <option>Creative &amp; Media</option>
+            <option>Education</option>
+            <option>Real Estate</option>
+            <option>Construction &amp; Trades</option>
+            <option>Other</option>
+          </select>
+          <p class="ob-error" id="err-industry" data-i18n-err="ob.err.industry">Please select your industry.</p>
+        </div>
+
+        <div class="ob-field">
+          <label for="description"><span data-i18n="ob.l.description">What does your business do?</span> <span class="ob-req">*</span></label>
+          <textarea id="description" class="ob-textarea" placeholder="Briefly describe what you offer and who you help…" data-i18n-ph="ob.ph.description"></textarea>
+          <p class="ob-error" id="err-description" data-i18n-err="ob.err.description">Please describe your business.</p>
+        </div>
+
+        <div class="ob-field">
+          <label for="target_audience"><span data-i18n="ob.l.target">Who is your target audience?</span> <span class="ob-req">*</span></label>
+          <input type="text" id="target_audience" class="ob-input" placeholder="e.g. Small business owners aged 25–45" data-i18n-ph="ob.ph.target">
+          <p class="ob-error" id="err-target_audience" data-i18n-err="ob.err.target">Please describe your target audience.</p>
+        </div>
+
+        <div class="ob-nav">
+          <div></div>
+          <div class="ob-nav-right">
+            <button class="ob-btn ob-btn-next" onclick="nextStep()"><span data-i18n-html="ob.btn.next">Next &nbsp;→</span></button>
+          </div>
+        </div>
+      </div><!-- /step-1 -->
+
+
+      <!-- ── STEP 2 — Brand Identity ── -->
+      <div class="ob-step" id="step-2">
+        <h2 class="ob-step-title" data-i18n="ob.s2.title">Brand Identity</h2>
+
+        <div class="ob-field">
+          <label data-i18n="ob.l.colours">Brand Colours</label>
+          <div class="ob-colour-row">
+            <div>
+              <span class="ob-colour-sub-label" data-i18n="ob.l.primary">Primary</span>
+              <div class="ob-colour-wrap">
+                <input type="color" id="colour_primary" class="ob-colour-input" value="#049BD3">
+                <span class="ob-colour-hex" id="hex-primary">#049BD3</span>
+              </div>
+            </div>
+            <div>
+              <span class="ob-colour-sub-label" data-i18n="ob.l.secondary">Secondary</span>
+              <div class="ob-colour-wrap">
+                <input type="color" id="colour_secondary" class="ob-colour-input" value="#39FF8E">
+                <span class="ob-colour-hex" id="hex-secondary">#39FF8E</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ob-field">
+          <label for="font_style" data-i18n="ob.l.font">Font Style</label>
+          <select id="font_style" class="ob-select">
+            <option value="" data-i18n="ob.ph.font">Choose a font style…</option>
+            <option>Modern</option>
+            <option>Classic</option>
+            <option>Bold</option>
+            <option>Minimal</option>
+          </select>
+        </div>
+
+        <div class="ob-field">
+          <label for="tone_of_voice" data-i18n="ob.l.tone">Tone of Voice</label>
+          <select id="tone_of_voice" class="ob-select">
+            <option value="" data-i18n="ob.ph.tone">Choose your tone…</option>
+            <option>Professional</option>
+            <option>Friendly</option>
+            <option>Bold</option>
+            <option>Fun</option>
+          </select>
+        </div>
+
+        <div class="ob-nav">
+          <button class="ob-btn ob-btn-back" onclick="prevStep()" data-i18n="ob.btn.back">← Back</button>
+          <div class="ob-nav-right">
+            <button class="ob-btn ob-btn-next" onclick="nextStep()"><span data-i18n-html="ob.btn.next">Next &nbsp;→</span></button>
+          </div>
+        </div>
+      </div><!-- /step-2 -->
+
+
+      <!-- ── STEP 3 — Your Website ── -->
+      <div class="ob-step" id="step-3">
+        <h2 class="ob-step-title" data-i18n="ob.s3.title">Your Website</h2>
+
+        <div class="ob-field">
+          <label for="website_goal"><span data-i18n="ob.l.goal">Main goal of your website</span> <span class="ob-req">*</span></label>
+          <select id="website_goal" class="ob-select">
+            <option value="" data-i18n="ob.ph.goal">Select a goal…</option>
+            <option>Generate Leads</option>
+            <option>Portfolio / Showcase</option>
+            <option>eCommerce / Sell Products</option>
+            <option>Informational</option>
+            <option>Take Bookings / Appointments</option>
+          </select>
+          <p class="ob-error" id="err-website_goal" data-i18n-err="ob.err.goal">Please select a website goal.</p>
+        </div>
+
+        <div class="ob-field">
+          <label data-i18n="ob.l.pages">Which pages do you need?</label>
+          <div class="ob-checkbox-group">
+            <label class="ob-checkbox-label"><input type="checkbox" name="pages" value="Home"> Home</label>
+            <label class="ob-checkbox-label"><input type="checkbox" name="pages" value="About"> About</label>
+            <label class="ob-checkbox-label"><input type="checkbox" name="pages" value="Services"> Services</label>
+            <label class="ob-checkbox-label"><input type="checkbox" name="pages" value="Contact"> Contact</label>
+            <label class="ob-checkbox-label"><input type="checkbox" name="pages" value="Blog"> Blog</label>
+            <label class="ob-checkbox-label"><input type="checkbox" name="pages" value="Pricing"> Pricing</label>
+            <label class="ob-checkbox-label"><input type="checkbox" name="pages" value="FAQ"> FAQ</label>
+            <label class="ob-checkbox-label"><input type="checkbox" name="pages" value="Testimonials"> Testimonials</label>
+          </div>
+        </div>
+
+        <div class="ob-field">
+          <label for="tagline" data-i18n="ob.l.tagline">Tagline or Key Message</label>
+          <input type="text" id="tagline" class="ob-input" placeholder="e.g. Build smarter, grow faster" data-i18n-ph="ob.ph.tagline">
+        </div>
+
+        <div class="ob-field">
+          <label for="services" data-i18n="ob.l.services">Services or Products to Highlight</label>
+          <textarea id="services" class="ob-textarea" placeholder="List your main offerings…" data-i18n-ph="ob.ph.services"></textarea>
+        </div>
+
+        <div class="ob-nav">
+          <button class="ob-btn ob-btn-back" onclick="prevStep()" data-i18n="ob.btn.back">← Back</button>
+          <div class="ob-nav-right">
+            <button class="ob-btn ob-btn-next" onclick="nextStep()"><span data-i18n-html="ob.btn.next">Next &nbsp;→</span></button>
+          </div>
+        </div>
+      </div><!-- /step-3 -->
+
+
+      <!-- ── STEP 4 — Inspiration & Extras ── -->
+      <div class="ob-step" id="step-4">
+        <h2 class="ob-step-title" data-i18n="ob.s4.title">Inspiration &amp; Extras</h2>
+
+        <div class="ob-field">
+          <label><span data-i18n="ob.l.inspo">Inspiration Websites</span> <span style="-webkit-text-fill-color:rgba(255,255,255,0.4);font-weight:400">(<span data-i18n="ob.l.upto3">up to 3</span>)</span></label>
+          <input type="url" id="inspo_1" class="ob-input ob-field-gap" placeholder="https://example.com" data-i18n-ph="ob.ph.inspo">
+          <input type="url" id="inspo_2" class="ob-input ob-field-gap" placeholder="https://example.com" data-i18n-ph="ob.ph.inspo">
+          <input type="url" id="inspo_3" class="ob-input" placeholder="https://example.com" data-i18n-ph="ob.ph.inspo">
+        </div>
+
+        <div class="ob-field">
+          <label><span data-i18n="ob.l.logo">Logo Upload</span> <span style="-webkit-text-fill-color:rgba(255,255,255,0.4);font-weight:400">(<span data-i18n="ob.l.optional">optional</span>)</span></label>
+          <div class="ob-upload-area" id="upload-area">
+            <span class="ob-upload-icon">☁</span>
+            <p class="ob-upload-text">
+              <span data-i18n="ob.upload.text">Click to upload or drag &amp; drop</span><br>
+              <span data-i18n="ob.upload.sub" style="opacity:0.55;font-size:11px">PNG, JPG, SVG — up to 5 MB</span>
+            </p>
+            <p class="ob-upload-preview" id="upload-preview"></p>
+            <input type="file" id="logo_file" accept="image/*" style="display:none">
+          </div>
+        </div>
+
+        <div class="ob-field">
+          <label for="notes" data-i18n="ob.l.notes">Additional Notes</label>
+          <textarea id="notes" class="ob-textarea" placeholder="Anything else we should know about your vision?" data-i18n-ph="ob.ph.notes"></textarea>
+        </div>
+
+        <div class="ob-nav">
+          <button class="ob-btn ob-btn-back" onclick="prevStep()" data-i18n="ob.btn.back">← Back</button>
+          <div class="ob-nav-right">
+            <button class="ob-btn ob-btn-next" onclick="nextStep()"><span data-i18n-html="ob.btn.next">Next &nbsp;→</span></button>
+          </div>
+        </div>
+      </div><!-- /step-4 -->
+
+
+      <!-- ── STEP 5 — Your Details ── -->
+      <div class="ob-step" id="step-5">
+        <h2 class="ob-step-title" data-i18n="ob.s5.title">Your Details</h2>
+
+        <div class="ob-field">
+          <label for="full_name"><span data-i18n="ob.l.fullname">Full Name</span> <span class="ob-req">*</span></label>
+          <input type="text" id="full_name" class="ob-input" placeholder="e.g. Sarah Johnson" data-i18n-ph="ob.ph.fullname" autocomplete="name">
+          <p class="ob-error" id="err-full_name" data-i18n-err="ob.err.fullname">Please enter your name.</p>
+        </div>
+
+        <div class="ob-field">
+          <label for="email"><span data-i18n="ob.l.email">Email Address</span> <span class="ob-req">*</span></label>
+          <input type="email" id="email" class="ob-input" placeholder="you@company.com" data-i18n-ph="ob.ph.email" autocomplete="email">
+          <p class="ob-error" id="err-email" data-i18n-err="ob.err.email">Please enter a valid email address.</p>
+        </div>
+
+        <div class="ob-field">
+          <label for="phone" data-i18n="ob.l.phone">Phone Number</label>
+          <input type="tel" id="phone" class="ob-input" placeholder="e.g. +1 555 123 4567" data-i18n-ph="ob.ph.phone" autocomplete="tel">
+        </div>
+
+        <div class="ob-field">
+          <label for="current_website" data-i18n="ob.l.website">Current Website</label>
+          <input type="url" id="current_website" class="ob-input" placeholder="https://yoursite.com" data-i18n-ph="ob.ph.website">
+        </div>
+
+        <div class="ob-field">
+          <label for="referral_source" data-i18n="ob.l.referral">How did you hear about us?</label>
+          <select id="referral_source" class="ob-select">
+            <option value="" data-i18n="ob.ph.referral">Select an option…</option>
+            <option>Google Search</option>
+            <option>Social Media</option>
+            <option>Word of Mouth</option>
+            <option>Advertisement</option>
+            <option>Blog / Article</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="ob-nav">
+          <button class="ob-btn ob-btn-back" onclick="prevStep()" data-i18n="ob.btn.back">← Back</button>
+          <div class="ob-nav-right">
+            <button class="ob-btn ob-btn-submit" id="submit-btn" onclick="submitForm()" data-i18n="ob.btn.submit">
+              Submit &amp; Get My Brief
+            </button>
+          </div>
+        </div>
+      </div><!-- /step-5 -->
+
+
+      <!-- ── STEP 6 — Thank You ── -->
+      <div class="ob-step" id="step-6">
+        <div class="ob-thankyou">
+          <div class="ob-thankyou-icon">✓</div>
+          <h2 class="ob-thankyou-title" data-i18n="ob.ty.title">You're all set!</h2>
+          <p class="ob-thankyou-sub" data-i18n="ob.ty.sub">
+            Your brief is downloading now. Our team will review everything and be in touch within 24 hours to start building your website.
+          </p>
+          <a href="index.html" class="btn-cta"><span data-i18n-html="ob.ty.btn">Back to Home &nbsp;→</span></a>
+        </div>
+      </div><!-- /step-6 -->
+
+    </div><!-- /.ob-card -->
+  </main>
+
+
+  <script src="i18n.js"></script>
+  <script src="globe.js"></script>
+  <script src="main.js"></script>
+  <script>
+  /* ──────────────────────────────────────────────────────────
+     AUTOMIFY — Onboarding Form
+     Replace SUPABASE_URL and SUPABASE_ANON_KEY with your own.
+     SQL to create the table is in the README / plan doc.
+  ────────────────────────────────────────────────────────── */
+
+  // ── CONFIG ──────────────────────────────────────────────
+  const SUPABASE_URL      = 'https://holmvijeubkccomdecgr.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvbG12aWpldWJrY2NvbWRlY2dyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4OTY2OTUsImV4cCI6MjA4ODQ3MjY5NX0.iutnNCCEHZnXEIHnDLexQuppcE1lu954FtGXmFUQYAI';
+
+  let sb = null;
+  try {
+    sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  } catch (e) {
+    console.warn('Supabase client init failed — PDF will still work.', e);
+  }
+
+  // ── STATE ────────────────────────────────────────────────
+  let currentStep = 1;
+  let logoBase64  = null;
+  const TOTAL_STEPS = 5;
+
+  const STEP_LABELS_DEFAULT = [
+    'Step 1 of 5 \u2014 About Your Business',
+    'Step 2 of 5 \u2014 Brand Identity',
+    'Step 3 of 5 \u2014 Your Website',
+    'Step 4 of 5 \u2014 Inspiration & Extras',
+    'Step 5 of 5 \u2014 Your Details',
+  ];
+
+  function getStepLabels() {
+    if (window.AutomifyI18n) {
+      const labels = window.AutomifyI18n.t('ob.step.labels');
+      if (Array.isArray(labels)) return labels;
+    }
+    return STEP_LABELS_DEFAULT;
+  }
+
+  // ── PROGRESS ─────────────────────────────────────────────
+  function updateProgress(step) {
+    for (let i = 1; i <= TOTAL_STEPS; i++) {
+      const dot = document.getElementById('dot-' + i);
+      if (!dot) continue;
+      dot.classList.remove('active', 'done');
+      if (i < step)      dot.classList.add('done');
+      else if (i === step) dot.classList.add('active');
+    }
+    for (let i = 1; i < TOTAL_STEPS; i++) {
+      const conn = document.getElementById('conn-' + i);
+      if (conn) conn.classList.toggle('done', i < step);
+    }
+    const lbl = document.getElementById('ob-step-label');
+    if (lbl && step <= TOTAL_STEPS) lbl.textContent = getStepLabels()[step - 1];
+  }
+
+  // ── SHOW STEP ────────────────────────────────────────────
+  function showStep(n) {
+    document.querySelectorAll('.ob-step').forEach(s => s.classList.remove('active'));
+    const target = document.getElementById('step-' + n);
+    if (target) target.classList.add('active');
+
+    const progressEl = document.getElementById('ob-progress');
+    const labelEl    = document.getElementById('ob-step-label');
+
+    if (n > TOTAL_STEPS) {
+      if (progressEl) progressEl.style.display = 'none';
+      if (labelEl)    labelEl.style.display    = 'none';
+    } else {
+      if (progressEl) progressEl.style.display = '';
+      if (labelEl)    labelEl.style.display    = '';
+      updateProgress(n);
+    }
+  }
+
+  // ── VALIDATION ───────────────────────────────────────────
+  function validateStep(step) {
+    const rules = {
+      1: [
+        { id: 'business_name',   errId: 'err-business_name'   },
+        { id: 'industry',        errId: 'err-industry',        isSelect: true },
+        { id: 'description',     errId: 'err-description'     },
+        { id: 'target_audience', errId: 'err-target_audience' },
+      ],
+      3: [
+        { id: 'website_goal', errId: 'err-website_goal', isSelect: true },
+      ],
+      5: [
+        { id: 'full_name', errId: 'err-full_name' },
+        { id: 'email',     errId: 'err-email',     isEmail: true },
+      ],
+    };
+
+    const fields = rules[step];
+    if (!fields) return true;
+
+    let valid = true;
+    fields.forEach(function(rule) {
+      const el  = document.getElementById(rule.id);
+      const err = document.getElementById(rule.errId);
+      let ok = false;
+
+      if (rule.isSelect) {
+        ok = el && el.value && el.value !== '';
+      } else if (rule.isEmail) {
+        ok = el && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim());
+      } else {
+        ok = el && el.value.trim().length > 0;
+      }
+
+      if (el)  el.classList.toggle('invalid', !ok);
+      if (err) err.classList.toggle('visible', !ok);
+      if (!ok) valid = false;
+    });
+
+    return valid;
+  }
+
+  // ── NAV ──────────────────────────────────────────────────
+  function nextStep() {
+    if (!validateStep(currentStep)) return;
+    currentStep++;
+    showStep(currentStep);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function prevStep() {
+    if (currentStep <= 1) return;
+    currentStep--;
+    showStep(currentStep);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── COLOUR PICKERS ───────────────────────────────────────
+  document.getElementById('colour_primary').addEventListener('input', function () {
+    document.getElementById('hex-primary').textContent = this.value.toUpperCase();
+  });
+  document.getElementById('colour_secondary').addEventListener('input', function () {
+    document.getElementById('hex-secondary').textContent = this.value.toUpperCase();
+  });
+
+  // Clear validation state on input change
+  document.querySelectorAll('.ob-input, .ob-select, .ob-textarea').forEach(function(el) {
+    el.addEventListener('input', function () {
+      el.classList.remove('invalid');
+      const err = document.getElementById('err-' + el.id);
+      if (err) err.classList.remove('visible');
+    });
+  });
+
+  // ── FILE UPLOAD ──────────────────────────────────────────
+  const fileInput  = document.getElementById('logo_file');
+  const uploadArea = document.getElementById('upload-area');
+
+  uploadArea.addEventListener('click', function () {
+    fileInput.click();
+  });
+
+  fileInput.addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+      alert('File is too large — please upload an image under 5 MB.');
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = function (ev) {
+      logoBase64 = ev.target.result;
+      document.getElementById('upload-preview').textContent = '\u2713 ' + file.name;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  uploadArea.addEventListener('dragover', function (e) {
+    e.preventDefault();
+    uploadArea.classList.add('drag-over');
+  });
+  uploadArea.addEventListener('dragleave', function () {
+    uploadArea.classList.remove('drag-over');
+  });
+  uploadArea.addEventListener('drop', function (e) {
+    e.preventDefault();
+    uploadArea.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (!file) return;
+    const dt = new DataTransfer();
+    dt.items.add(file);
+    fileInput.files = dt.files;
+    fileInput.dispatchEvent(new Event('change'));
+  });
+
+  // ── COLLECT DATA ─────────────────────────────────────────
+  function collectData() {
+    const pages = Array.from(document.querySelectorAll('input[name="pages"]:checked'))
+                       .map(function(cb) { return cb.value; });
+
+    const inspoUrls = [
+      document.getElementById('inspo_1').value.trim(),
+      document.getElementById('inspo_2').value.trim(),
+      document.getElementById('inspo_3').value.trim(),
+    ].filter(function(u) { return u.length > 0; });
+
+    return {
+      business_name:    document.getElementById('business_name').value.trim(),
+      industry:         document.getElementById('industry').value,
+      description:      document.getElementById('description').value.trim(),
+      target_audience:  document.getElementById('target_audience').value.trim(),
+      colour_primary:   document.getElementById('colour_primary').value,
+      colour_secondary: document.getElementById('colour_secondary').value,
+      font_style:       document.getElementById('font_style').value,
+      tone_of_voice:    document.getElementById('tone_of_voice').value,
+      website_goal:     document.getElementById('website_goal').value,
+      pages_needed:     pages,
+      tagline:          document.getElementById('tagline').value.trim(),
+      services:         document.getElementById('services').value.trim(),
+      inspiration_urls: inspoUrls,
+      logo_base64:      logoBase64,
+      notes:            document.getElementById('notes').value.trim(),
+      full_name:        document.getElementById('full_name').value.trim(),
+      email:            document.getElementById('email').value.trim(),
+      phone:            document.getElementById('phone').value.trim(),
+      current_website:  document.getElementById('current_website').value.trim(),
+      referral_source:  document.getElementById('referral_source').value,
+    };
+  }
+
+  // ── PDF GENERATION ───────────────────────────────────────
+  function generatePDF(data) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+
+    const PW   = 595.28;
+    const PH   = 841.89;
+    const BLUE = [4, 155, 211];
+    const GREEN= [57, 255, 142];
+    const DARK = [15, 17, 23];
+    const BODY = [90, 105, 125];
+    const GREY = [145, 158, 175];
+
+    let y = 0;
+
+    // ─ Header background ─
+    doc.setFillColor(15, 17, 23);
+    doc.rect(0, 0, PW, 96, 'F');
+
+    // ─ Automify brand name ─
+    doc.setFontSize(24);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(...BLUE);
+    doc.text('AUTOMIFY', 40, 44);
+
+    doc.setFontSize(9.5);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(...GREEN);
+    doc.text('CLIENT WEBSITE BRIEF', 40, 64);
+
+    doc.setFontSize(8.5);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(...GREY);
+    const dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    doc.text('Generated: ' + dateStr, 40, 80);
+
+    // ─ Logo image (top-right) ─
+    if (data.logo_base64) {
+      try {
+        const props = doc.getImageProperties(data.logo_base64);
+        const imgH  = 52;
+        const imgW  = (props.width / props.height) * imgH;
+        doc.addImage(data.logo_base64, PW - imgW - 38, 22, imgW, imgH);
+      } catch (e) { /* skip unsupported format */ }
+    }
+
+    y = 116;
+
+    // ─ Helpers ─
+    function checkPage(needed) {
+      if (y + needed > PH - 50) {
+        doc.addPage();
+        y = 40;
+      }
+    }
+
+    function section(title) {
+      checkPage(40);
+      doc.setDrawColor(...GREEN);
+      doc.setLineWidth(0.6);
+      doc.line(40, y, PW - 40, y);
+      y += 16;
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(...BLUE);
+      doc.text(title.toUpperCase(), 40, y);
+      y += 18;
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(10);
+      doc.setTextColor(...BODY);
+    }
+
+    function row(label, value) {
+      if (!value || (Array.isArray(value) && value.length === 0)) return;
+      const valStr = Array.isArray(value) ? value.join(', ') : String(value);
+      checkPage(20);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9.5);
+      doc.setTextColor(...DARK);
+      doc.text(label + ':', 40, y);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9.5);
+      doc.setTextColor(...BODY);
+      const lines = doc.splitTextToSize(valStr, PW - 200);
+      doc.text(lines, 172, y);
+      y += lines.length * 14 + 4;
+    }
+
+    function colourRow(label, hex) {
+      if (!hex) return;
+      checkPage(22);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9.5);
+      doc.setTextColor(...DARK);
+      doc.text(label + ':', 40, y);
+      // colour swatch
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      doc.setFillColor(r, g, b);
+      doc.roundedRect(172, y - 10, 14, 12, 2, 2, 'F');
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9.5);
+      doc.setTextColor(...BODY);
+      doc.text(hex.toUpperCase(), 192, y);
+      y += 18;
+    }
+
+    // ─ Section 1 ─
+    section('About Your Business');
+    row('Business Name',   data.business_name);
+    row('Industry',        data.industry);
+    row('Description',     data.description);
+    row('Target Audience', data.target_audience);
+    y += 6;
+
+    // ─ Section 2 ─
+    section('Brand Identity');
+    colourRow('Primary Colour',   data.colour_primary);
+    colourRow('Secondary Colour', data.colour_secondary);
+    row('Font Style',     data.font_style);
+    row('Tone of Voice',  data.tone_of_voice);
+    y += 6;
+
+    // ─ Section 3 ─
+    section('Website Requirements');
+    row('Website Goal',       data.website_goal);
+    row('Pages Needed',       data.pages_needed);
+    row('Tagline',            data.tagline);
+    row('Services / Products',data.services);
+    y += 6;
+
+    // ─ Section 4 ─
+    section('Inspiration & Extras');
+    data.inspiration_urls.forEach(function(url, i) {
+      row('Inspiration ' + (i + 1), url);
+    });
+    row('Notes', data.notes);
+    y += 6;
+
+    // ─ Section 5 ─
+    section('Client Details');
+    row('Full Name',       data.full_name);
+    row('Email',           data.email);
+    row('Phone',           data.phone);
+    row('Current Website', data.current_website);
+    row('How They Found Us', data.referral_source);
+    y += 14;
+
+    // ─ Footer ─
+    const pageCount = doc.internal.getNumberOfPages();
+    for (let p = 1; p <= pageCount; p++) {
+      doc.setPage(p);
+      const footY = PH - 28;
+      doc.setDrawColor(...BLUE);
+      doc.setLineWidth(0.4);
+      doc.line(40, footY - 10, PW - 40, footY - 10);
+      doc.setFontSize(7.5);
+      doc.setTextColor(...GREY);
+      doc.text('Automify \u2014 hello@automify.io', 40, footY);
+      doc.text('This brief is confidential.  Page ' + p + ' of ' + pageCount, PW - 40, footY, { align: 'right' });
+    }
+
+    const safeName = data.business_name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    doc.save('automify-brief-' + safeName + '.pdf');
+  }
+
+  // ── SUBMIT ───────────────────────────────────────────────
+  async function submitForm() {
+    if (!validateStep(5)) return;
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+
+    const data = collectData();
+
+    // Save to Supabase + send email notification
+    if (sb) {
+      try {
+        const { error } = await sb.from('client_submissions').insert([data]);
+        if (error) console.warn('Supabase insert error:', error.message);
+      } catch (e) {
+        console.warn('Supabase error:', e.message);
+      }
+
+      // Fire email notification via Edge Function (non-blocking)
+      try {
+        await sb.functions.invoke('notify-submission', { body: data });
+      } catch (e) {
+        console.warn('Email notification error:', e.message);
+      }
+    }
+
+    // Generate & download PDF
+    try {
+      generatePDF(data);
+    } catch (e) {
+      console.error('PDF generation error:', e);
+    }
+
+    // Show thank-you screen
+    currentStep = 6;
+    showStep(6);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── LANGUAGE CHANGE — update step label on lang switch ───
+  document.addEventListener('automify:langchange', function () {
+    updateProgress(currentStep);
+  });
+
+  // ── INIT ─────────────────────────────────────────────────
+  showStep(1);
+  </script>
+
+</body>
+</html>
