@@ -62,7 +62,13 @@ body {
 
 #globe {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* Extend past innerHeight into the iOS safe area, overriding Three.js inline style */
+  bottom: calc(-1 * env(safe-area-inset-bottom, 0px)) !important;
+  width: 100% !important;
+  height: calc(100dvh + env(safe-area-inset-bottom, 0px)) !important;
   z-index: 1;
   pointer-events: none;
 }
