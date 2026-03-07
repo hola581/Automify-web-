@@ -14,8 +14,12 @@
   const camera   = new THREE.PerspectiveCamera(42, innerWidth / innerHeight, 0.1, 1000);
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
 
-  renderer.setSize(innerWidth, innerHeight, false); // false = don't override CSS; inset:0 handles full coverage
+  renderer.setSize(innerWidth, innerHeight, false);
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  // setPixelRatio internally re-runs setSize with updateStyle=true, so clear the inline
+  // styles afterwards — CSS position:fixed + inset:0 handles full-screen coverage
+  canvas.style.width = '';
+  canvas.style.height = '';
   renderer.setClearColor(0x000000, 0); // fully transparent background
 
   /* ── Camera ── */
