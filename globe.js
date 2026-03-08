@@ -9,12 +9,20 @@
   const canvas = document.getElementById('globe');
   if (!canvas || typeof THREE === 'undefined') return;
 
+  /* ── Safe-area helper ── */
+  // env(safe-area-inset-bottom) is exposed as --sab in :root so JS can read it.
+  // We add it to innerHeight so WebGL renders into the iOS home-indicator zone,
+  // eliminating the white gap behind the Safari toolbar.
+  function getSafeAreaBottom() {
+    return parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sab')) || 0;
+  }
+
   /* ── Scene setup ── */
   const scene    = new THREE.Scene();
   const camera   = new THREE.PerspectiveCamera(42, innerWidth / innerHeight, 0.1, 1000);
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
 
-  renderer.setSize(innerWidth, innerHeight);
+  renderer.setSize(innerWidth, innerHeight + getSafeAreaBottom());
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.setClearColor(0x000000, 0); // fully transparent background
 
@@ -128,7 +136,7 @@
   window.addEventListener('resize', () => {
     camera.aspect = innerWidth / innerHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize(innerWidth, innerHeight);
+    renderer.setSize(innerWidth, innerHeight + getSafeAreaBottom());
   });
 
   /* ── Animation loop ── */

@@ -35,6 +35,7 @@
   --card-bg:     rgba(12, 14, 22, 0.84);
   --card-border: rgba(255, 255, 255, 0.09);
   --nav-bg:      rgba(255, 255, 255, 0.88);
+  --sab:         env(safe-area-inset-bottom, 0px); /* JS reads this to extend WebGL into safe area */
 }
 
 html {
@@ -62,13 +63,7 @@ body {
 
 #globe {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  /* Extend past innerHeight into the iOS safe area, overriding Three.js inline style */
-  bottom: calc(-1 * env(safe-area-inset-bottom, 0px)) !important;
-  width: 100% !important;
-  height: calc(100dvh + env(safe-area-inset-bottom, 0px)) !important;
+  inset: 0;
   z-index: 1;
   pointer-events: none;
 }
