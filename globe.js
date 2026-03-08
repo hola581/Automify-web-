@@ -10,11 +10,16 @@
   if (!canvas || typeof THREE === 'undefined') return;
 
   /* ── Safe-area helper ── */
-  // env(safe-area-inset-bottom) is exposed as --sab in :root so JS can read it.
-  // We add it to innerHeight so WebGL renders into the iOS home-indicator zone,
-  // eliminating the white gap behind the Safari toolbar.
+  // Measures a sentinel element sized to env(safe-area-inset-bottom).
+  // More reliable than reading env() from a CSS custom property, which some
+  // Safari versions return as a literal string rather than a computed px value.
   function getSafeAreaBottom() {
-    return parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sab')) || 0;
+    const el = document.createElement('div');
+    el.style.cssText = 'position:fixed;bottom:0;height:env(safe-area-inset-bottom,0px);left:0;right:0;pointer-events:none;visibility:hidden;';
+    document.documentElement.appendChild(el);
+    const h = el.getBoundingClientRect().height || 0;
+    el.remove();
+    return h;
   }
 
   /* ── Scene setup ── */

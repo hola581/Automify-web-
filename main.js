@@ -11,8 +11,23 @@
   const pCtx    = pCanvas ? pCanvas.getContext('2d') : null;
 
   if (pCtx) {
+    // Measure safe-area insets via sentinel elements so particles fill the
+    // status-bar zone (top) and home-indicator zone (bottom) on iOS Safari.
+    function getSafeInsets() {
+      const t = document.createElement('div');
+      const b = document.createElement('div');
+      t.style.cssText = 'position:fixed;top:0;height:env(safe-area-inset-top,0px);left:0;right:0;pointer-events:none;visibility:hidden;';
+      b.style.cssText = 'position:fixed;bottom:0;height:env(safe-area-inset-bottom,0px);left:0;right:0;pointer-events:none;visibility:hidden;';
+      document.documentElement.appendChild(t);
+      document.documentElement.appendChild(b);
+      const insets = { top: t.getBoundingClientRect().height || 0, bottom: b.getBoundingClientRect().height || 0 };
+      t.remove(); b.remove();
+      return insets;
+    }
+
     let W = innerWidth;
-    let H = innerHeight;
+    const _i = getSafeInsets();
+    let H = innerHeight + _i.top + _i.bottom;
     pCanvas.width  = W;
     pCanvas.height = H;
 
@@ -53,8 +68,9 @@
     drawParticles();
 
     window.addEventListener('resize', () => {
+      const _ri = getSafeInsets();
       W = pCanvas.width  = innerWidth;
-      H = pCanvas.height = innerHeight;
+      H = pCanvas.height = innerHeight + _ri.top + _ri.bottom;
     }, { passive: true });
   }
 
