@@ -448,19 +448,19 @@ body {
   position: absolute;
   background: linear-gradient(
     135deg,
-    rgba(4, 155, 211, 0.18) 0%,
-    rgba(57, 255, 142, 0.10) 100%
+    rgba(4, 155, 211, 0.52) 0%,
+    rgba(57, 255, 142, 0.32) 100%
   );
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
-  border: 1px solid rgba(255, 255, 255, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 20px;
   padding: 20px 24px;
   color: #fff;
   min-width: 215px;
   box-shadow:
-    0 12px 40px rgba(4, 155, 211, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+    0 12px 40px rgba(4, 155, 211, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
 }
 
 /* Left card */
