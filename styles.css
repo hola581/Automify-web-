@@ -491,10 +491,8 @@ body {
 .stat-label {
   font-size: 11px;
   font-weight: 600;
-  background: linear-gradient(135deg, #049BD3 0%, #39FF8E 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 0.8px;
 }
@@ -523,19 +521,15 @@ body {
   font-size: 14px;
   font-weight: 600;
   line-height: 1.35;
-  background: linear-gradient(135deg, #049BD3 0%, #39FF8E 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
 }
 
 .stat-value-inline {
   font-size: 16px;
   font-weight: 800;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
   white-space: nowrap;
 }
 
@@ -545,10 +539,8 @@ body {
   line-height: 1;
   letter-spacing: -1px;
   margin-bottom: 12px;
-  background: linear-gradient(135deg, #049BD3 0%, #39FF8E 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
 }
 
 .stat-progress {
@@ -699,10 +691,8 @@ body {
   font-weight: 800;
   line-height: 1;
   letter-spacing: -2px;
-  background: linear-gradient(135deg, #049BD3 0%, #39FF8E 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
   opacity: 0.6;
   margin-bottom: 22px;
 }
@@ -710,10 +700,8 @@ body {
 .promo-card h3 {
   font-size: 18px;
   font-weight: 700;
-  background: linear-gradient(135deg, #049BD3 0%, #39FF8E 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
   margin-bottom: 12px;
   letter-spacing: -0.3px;
 }
@@ -721,10 +709,8 @@ body {
 .promo-card p {
   font-size: 14px;
   line-height: 1.68;
-  background: linear-gradient(135deg, #049BD3 0%, #39FF8E 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
 }
 
 /* Big CTA — glassmorphism with gradient text */
@@ -1103,10 +1089,8 @@ body {
   font-weight: 800;
   line-height: 1;
   letter-spacing: -2px;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
   opacity: 0.45;
   margin-bottom: 18px;
 }
@@ -1114,10 +1098,8 @@ body {
 .sol-card-title {
   font-size: 21px;
   font-weight: 700;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
   margin-bottom: 10px;
   letter-spacing: -0.4px;
 }
@@ -1125,10 +1107,8 @@ body {
 .sol-card-desc {
   font-size: 13.5px;
   line-height: 1.68;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
   margin-bottom: 22px;
   opacity: 0.8;
 }
@@ -1146,10 +1126,8 @@ body {
 .sol-features li {
   font-size: 13px;
   font-weight: 500;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1345,10 +1323,8 @@ body {
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.8px;
-  background: linear-gradient(135deg, #049BD3 0%, #39FF8E 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
   margin-bottom: 28px;
 }
 
@@ -1360,10 +1336,8 @@ body {
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.2px;
-  background: linear-gradient(135deg, #049BD3 0%, #39FF8E 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
   margin-bottom: 8px;
 }
 
@@ -1454,10 +1428,8 @@ body {
   display: block;
   font-size: 12px;
   font-weight: 600;
-  background: linear-gradient(135deg, #049BD3 0%, #39FF8E 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
   opacity: 0.75;
   margin-bottom: 7px;
 }
@@ -1513,10 +1485,8 @@ body {
   cursor: pointer;
   font-size: 13.5px;
   font-weight: 500;
-  background: linear-gradient(135deg, #049BD3 0%, #39FF8E 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
   line-height: 1;
 }
 
@@ -1578,10 +1548,8 @@ body {
 .ob-upload-text {
   font-size: 13px;
   font-weight: 500;
-  background: linear-gradient(135deg, #049BD3 0%, #39FF8E 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
   opacity: 0.75;
   line-height: 1.6;
 }
@@ -1720,20 +1688,16 @@ body {
   font-size: 36px;
   font-weight: 800;
   letter-spacing: -1px;
-  background: linear-gradient(135deg, #049BD3, #39FF8E);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
   margin-bottom: 14px;
 }
 
 .ob-thankyou-sub {
   font-size: 15px;
   line-height: 1.68;
-  background: linear-gradient(135deg, #049BD3 0%, #39FF8E 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
   opacity: 0.75;
   max-width: 380px;
   margin: 0 auto 32px;
