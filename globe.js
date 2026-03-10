@@ -19,7 +19,7 @@
     document.documentElement.appendChild(el);
     const h = el.getBoundingClientRect().height || 0;
     el.remove();
-    return h;
+    return Math.max(h, 120); // guarantee at least 120px below innerHeight
   }
 
   /* ── Scene setup ── */
