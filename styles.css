@@ -66,10 +66,12 @@ body {
 
 #globe {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: -150px;   /* bleed 150px below viewport so globe covers Safari toolbar */
   z-index: 1;
   pointer-events: none;
-  /* Fills transparent WebGL pixels in the bottom home-indicator safe area on iOS */
   background: linear-gradient(to bottom, transparent 88%, #071220 100%);
 }
 
