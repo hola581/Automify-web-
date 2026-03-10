@@ -41,7 +41,7 @@
 html {
   scroll-behavior: smooth;
   background: #ffffff;
-  overflow-x: hidden;
+  overflow-x: clip; /* clip = no scroll container, so position:fixed stays viewport-relative */
 }
 
 body {
