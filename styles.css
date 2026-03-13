@@ -82,7 +82,7 @@ body {
 ────────────────────────────────────── */
 .navbar {
   position: fixed;
-  top: 18px;
+  top: calc(env(safe-area-inset-top, 0px) + 18px);
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 64px);
@@ -942,7 +942,7 @@ body {
 
 @media (max-width: 768px) {
   /* Nav */
-  .navbar { width: calc(100% - 32px); top: 12px; }
+  .navbar { width: calc(100% - 32px); top: calc(env(safe-area-inset-top, 0px) + 12px); }
   .nav-container { padding: 0 18px; height: 60px; }
   .nav-logo { margin-right: 0; }
   .nav-links { display: none; }
