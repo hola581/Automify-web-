@@ -175,6 +175,12 @@
       'ob.err.goal':          'Please select a website goal.',
       'ob.err.fullname':      'Please enter your name.',
       'ob.err.email':         'Please enter a valid email address.',
+
+      // ── COOKIE BANNER
+      'cookie.msg':    'We use cookies to improve your browsing experience and analyse site traffic.',
+      'cookie.policy': 'Cookie Policy',
+      'cookie.accept': 'Accept All',
+      'cookie.reject': 'Reject Non-Essential',
     },
 
     /* ══════════════════════════════════════
@@ -346,6 +352,12 @@
       'ob.err.goal':          'Por favor selecciona un objetivo para el sitio web.',
       'ob.err.fullname':      'Por favor ingresa tu nombre.',
       'ob.err.email':         'Por favor ingresa una direcci\u00f3n de correo v\u00e1lida.',
+
+      // ── COOKIE BANNER
+      'cookie.msg':    'Usamos cookies para mejorar tu experiencia de navegaci\u00f3n y analizar el tr\u00e1fico del sitio.',
+      'cookie.policy': 'Pol\u00edtica de Cookies',
+      'cookie.accept': 'Aceptar Todo',
+      'cookie.reject': 'Rechazar No Esenciales',
     },
   };
 
