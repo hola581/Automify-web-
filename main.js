@@ -215,7 +215,7 @@
     for (var i = 0; i < tmp.childNodes.length; i++) walkNode(tmp.childNodes[i], null);
 
     var charCount = tokens.filter(function (t) { return t.type === 'char'; }).length;
-    var interval  = 2600 / charCount; // ~2.6 s total
+    var interval  = 2000 / charCount; // ~2 s total
     var pos = 0;
 
     function buildHTML(upTo) {
@@ -246,18 +246,39 @@
       if (pos < tokens.length) {
         setTimeout(tick, interval);
       } else {
-        // Typing done — restore original HTML, then reveal subtitle and CTA
+        // h1 done — restore HTML, then type subtitle
         setTimeout(function () {
           h1.innerHTML = originalHTML;
-          subtitle.style.transition = 'opacity 0.6s ease';
-          subtitle.style.opacity    = '1';
-          setTimeout(function () {
-            cta.style.transition    = 'opacity 0.6s ease';
-            cta.style.opacity       = '1';
-            cta.style.pointerEvents = 'auto';
-          }, 500);
+          typeSubtitle();
         }, 150);
       }
+    }
+
+    function typeSubtitle() {
+      var text     = subtitle.textContent;
+      var subInterval = 700 / text.length; // ~0.7 s
+      var subPos   = 0;
+      subtitle.textContent = '';
+      subtitle.style.opacity = '1';
+
+      function subTick() {
+        subPos++;
+        subtitle.textContent = text.slice(0, subPos) + (subPos < text.length ? '' : '');
+        if (subPos < text.length) {
+          // Add blinking cursor while typing
+          subtitle.innerHTML = text.slice(0, subPos) + '<span class="tw-cursor"></span>';
+          setTimeout(subTick, subInterval);
+        } else {
+          subtitle.textContent = text;
+          // CTA fades in slowly after subtitle finishes
+          setTimeout(function () {
+            cta.style.transition    = 'opacity 1.2s ease';
+            cta.style.opacity       = '1';
+            cta.style.pointerEvents = 'auto';
+          }, 100);
+        }
+      }
+      subTick();
     }
 
     setTimeout(tick, 300);
