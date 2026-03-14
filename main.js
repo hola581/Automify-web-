@@ -215,13 +215,8 @@
     for (var i = 0; i < tmp.childNodes.length; i++) walkNode(tmp.childNodes[i], null);
 
     var charCount = tokens.filter(function (t) { return t.type === 'char'; }).length;
-    var baseInterval = 1900 / charCount; // ~1.9 s total
+    var interval  = 1500 / charCount; // ~1.5 s total, constant speed
     var pos = 0;
-
-    function nextInterval() {
-      // ±25% random variation for a natural, fluid feel
-      return baseInterval * (0.75 + Math.random() * 0.5);
-    }
 
     function buildHTML(upTo) {
       var html = '';
@@ -249,7 +244,7 @@
       h1.innerHTML = buildHTML(pos) + '<span class="tw-cursor"></span>';
 
       if (pos < tokens.length) {
-        setTimeout(tick, nextInterval());
+        setTimeout(tick, interval);
       } else {
         // h1 done — restore HTML, then type subtitle
         setTimeout(function () {
@@ -286,10 +281,10 @@
       subTick();
     }
 
-    // Make h1 visible (empty) before starting so gradient is ready
-    h1.style.opacity = '1';
+    // Clear text FIRST (while still opacity:0), then show — prevents any flash
     h1.innerHTML = '';
-    setTimeout(tick, 200);
+    h1.style.opacity = '1';
+    setTimeout(tick, 150);
   })();
 
   /* ────────────────────────────────────
