@@ -54,6 +54,51 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* ── Paper airplane background decoration ── */
+@keyframes planeEntryMobile {
+  from {
+    background-position: left bottom;
+    opacity: 0;
+  }
+  to {
+    background-position: center center;
+    opacity: 0.75;
+  }
+}
+
+@keyframes planeEntryDesktop {
+  from {
+    transform: translate(-45%, 45%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 0.75;
+  }
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url('avion-de-papel-nobg.png') center center / contain no-repeat;
+  opacity: 0.75;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (max-width: 600px) {
+  body::after {
+    animation: planeEntryMobile 2.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+@media (min-width: 601px) {
+  body::after {
+    animation: planeEntryDesktop 4.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
 /* ──────────────────────────────────────
    BACKGROUND CANVASES
 ────────────────────────────────────── */
@@ -335,11 +380,21 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding-top: 0;
+  justify-content: flex-start;
+  padding-top: 108px;
   padding-bottom: 48px;
   overflow: visible;
   background: transparent;
+}
+
+/* Desktop: CTA button pinned to absolute center of hero */
+@media (min-width: 769px) {
+  .hero-cta-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 /* Subtle radial glow under the globe area */
@@ -516,6 +571,44 @@ body {
     0 0 56px rgba(57, 255, 142, 0.28),
     0 0 90px rgba(4, 155, 211, 0.16),
     inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* Desktop: reduce colored glow on navbar + buttons */
+@media (min-width: 769px) {
+  .navbar {
+    box-shadow:
+      0 4px 16px rgba(4, 155, 211, 0.06),
+      0 0 10px rgba(57, 255, 142, 0.03),
+      inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  }
+  .navbar:hover {
+    box-shadow:
+      0 6px 20px rgba(4, 155, 211, 0.10),
+      0 0 16px rgba(57, 255, 142, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  }
+  .btn-cta {
+    box-shadow:
+      0 4px 16px rgba(4, 155, 211, 0.08),
+      0 0 10px rgba(57, 255, 142, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+  .btn-cta:hover {
+    box-shadow:
+      0 6px 22px rgba(4, 155, 211, 0.16),
+      0 0 24px rgba(57, 255, 142, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+  .btn-signup {
+    box-shadow:
+      0 2px 10px rgba(4, 155, 211, 0.10),
+      0 0 8px rgba(57, 255, 142, 0.05);
+  }
+  .btn-signup:hover {
+    box-shadow:
+      0 4px 14px rgba(4, 155, 211, 0.16),
+      0 0 14px rgba(57, 255, 142, 0.08);
+  }
 }
 
 /* ──────────────────────────────────────
@@ -869,6 +962,17 @@ body {
   }
 }
 
+@keyframes cardsRiseMobile {
+  from {
+    opacity: 0;
+    transform: translateY(80vh);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes fadeInLeft {
   from {
     opacity: 0;
@@ -1025,17 +1129,40 @@ body {
   .hero-bottom { bottom: 20px; }
   .hero-subtitle { font-size: 12px; }
   .btn-cta { padding: 13px 32px; font-size: 15px; }
+  /* On mobile, btn-cta stays in flow after h1 */
+  .hero-cta-center { position: relative; top: auto; left: auto; transform: none; margin-top: 28px; }
 
-  /* Stat cards — make relative/stacked */
-  .stat-card {
+  /* Stat cards row — absolute, side by side, below airplane */
+  .stat-cards-row {
+    position: absolute;
+    bottom: 120px;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    padding: 0 16px;
+    animation: cardsRiseMobile 3.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .stat-cards-row .stat-card {
     position: relative;
     left: auto !important;
     right: auto !important;
     top: auto !important;
-    margin: 12px auto 0;
-    max-width: 300px;
-    animation: fadeUp 0.8s 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+    flex: 1;
+    min-width: 0;
+    max-width: none;
+    margin: 0;
+    padding: 14px 14px;
+    animation: none;
   }
+
+  .stat-cards-row .stat-label        { font-size: 9px; }
+  .stat-cards-row .stat-title        { font-size: 12px; }
+  .stat-cards-row .stat-value-inline { font-size: 14px; }
+  .stat-cards-row .stat-big-number   { font-size: 28px; }
 
   .feature-grid { grid-template-columns: 1fr; }
 
@@ -1273,7 +1400,50 @@ body {
 }
 
 @media (max-width: 600px) {
-  .sol-grid { grid-template-columns: 1fr; }
+  .sol-grid-section {
+    overflow: hidden;
+    padding: 16px 0 72px;
+  }
+  .sol-grid {
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    gap: 1rem;
+    padding: 0 1.5rem;
+    grid-template-columns: unset;
+    scrollbar-width: none;
+  }
+  .sol-grid::-webkit-scrollbar { display: none; }
+  .sol-card,
+  .sol-card-last {
+    flex: 0 0 82vw;
+    max-width: 82vw;
+    scroll-snap-align: center;
+  }
+  .sol-carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+  }
+  .sol-carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .sol-carousel-dot.active {
+    background: #39ff8e;
+  }
+}
+
+@media (min-width: 601px) {
+  .sol-carousel-dots { display: none; }
 }
 
 @media (max-width: 480px) {

@@ -199,7 +199,9 @@
         } else {
           timer = setTimeout(function () {
             h1.innerHTML = h1HTML;
-            typeSubtitle(subtitleTxt);
+            // On mobile, wait for plane + stat cards before showing subtitle & CTA
+            var subtitleDelay = (window.innerWidth <= 600) ? 1200 : 0;
+            timer = setTimeout(function () { typeSubtitle(subtitleTxt); }, subtitleDelay);
           }, 150);
         }
       }
