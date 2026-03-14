@@ -184,43 +184,41 @@
 
     if (!h1 || !subtitle || !cta) return;
 
-    // Hide subtitle and CTA immediately — no flash
-    subtitle.style.opacity      = '0';
-    cta.style.opacity           = '0';
-    cta.style.pointerEvents     = 'none';
+    var timer = null; // active timeout — cancelled on language change
 
-    var originalHTML = h1.innerHTML;
+    function reset() {
+      if (timer) { clearTimeout(timer); timer = null; }
+      h1.style.opacity       = '0';
+      subtitle.style.opacity = '0';
+      cta.style.opacity      = '0';
+      cta.style.transition   = 'none';
+      cta.style.pointerEvents = 'none';
+    }
 
-    // Build a flat token array from the h1 HTML tree
-    var tokens = [];
-    var tmp = document.createElement('div');
-    tmp.innerHTML = originalHTML;
-
-    function walkNode(node, ctx) {
-      if (node.nodeType === 3) {
-        for (var i = 0; i < node.textContent.length; i++) {
-          tokens.push({ type: 'char', char: node.textContent[i], ctx: ctx });
-        }
-      } else if (node.nodeType === 1) {
-        var tag = node.tagName.toLowerCase();
-        if (tag === 'br') {
-          tokens.push({ type: 'br' });
-        } else {
-          for (var j = 0; j < node.childNodes.length; j++) {
-            walkNode(node.childNodes[j], tag);
+    function buildTokens(html) {
+      var tokens = [];
+      var tmp = document.createElement('div');
+      tmp.innerHTML = html;
+      function walk(node, ctx) {
+        if (node.nodeType === 3) {
+          for (var i = 0; i < node.textContent.length; i++) {
+            tokens.push({ type: 'char', char: node.textContent[i], ctx: ctx });
+          }
+        } else if (node.nodeType === 1) {
+          var tag = node.tagName.toLowerCase();
+          if (tag === 'br') {
+            tokens.push({ type: 'br' });
+          } else {
+            for (var j = 0; j < node.childNodes.length; j++) walk(node.childNodes[j], tag);
           }
         }
       }
+      for (var k = 0; k < tmp.childNodes.length; k++) walk(tmp.childNodes[k], null);
+      return tokens;
     }
-    for (var i = 0; i < tmp.childNodes.length; i++) walkNode(tmp.childNodes[i], null);
 
-    var charCount = tokens.filter(function (t) { return t.type === 'char'; }).length;
-    var interval  = 1500 / charCount; // ~1.5 s total, constant speed
-    var pos = 0;
-
-    function buildHTML(upTo) {
-      var html = '';
-      var openTag = null;
+    function buildHTML(tokens, upTo) {
+      var html = '', openTag = null;
       for (var i = 0; i < upTo; i++) {
         var tok = tokens[i];
         if (tok.type === 'br') {
@@ -239,39 +237,56 @@
       return html;
     }
 
-    function tick() {
-      pos++;
-      h1.innerHTML = buildHTML(pos) + '<span class="tw-cursor"></span>';
+    function runTypewriter() {
+      reset();
 
-      if (pos < tokens.length) {
-        setTimeout(tick, interval);
-      } else {
-        // h1 done — restore HTML, then type subtitle
-        setTimeout(function () {
-          h1.innerHTML = originalHTML;
-          typeSubtitle();
-        }, 150);
+      // Read current translated content from i18n-stored attribute or DOM
+      var h1HTML      = h1.getAttribute('data-tw-original') || h1.innerHTML;
+      var subtitleTxt = subtitle.getAttribute('data-tw-original') || subtitle.textContent;
+
+      // Save originals for restore
+      h1.setAttribute('data-tw-original', h1HTML);
+      subtitle.setAttribute('data-tw-original', subtitleTxt);
+
+      var tokens      = buildTokens(h1HTML);
+      var charCount   = tokens.filter(function(t){ return t.type === 'char'; }).length;
+      var interval    = 1500 / charCount;
+      var pos         = 0;
+
+      // Clear h1 and make visible (empty — no flash)
+      h1.innerHTML    = '';
+      h1.style.opacity = '1';
+
+      function tick() {
+        pos++;
+        h1.innerHTML = buildHTML(tokens, pos) + '<span class="tw-cursor"></span>';
+        if (pos < tokens.length) {
+          timer = setTimeout(tick, interval);
+        } else {
+          timer = setTimeout(function () {
+            h1.innerHTML = h1HTML;
+            typeSubtitle(subtitleTxt);
+          }, 150);
+        }
       }
+
+      timer = setTimeout(tick, 150);
     }
 
-    function typeSubtitle() {
-      var text     = subtitle.textContent;
-      var subInterval = 700 / text.length; // ~0.7 s
-      var subPos   = 0;
+    function typeSubtitle(text) {
+      var subInterval = 700 / text.length;
+      var subPos = 0;
       subtitle.textContent = '';
       subtitle.style.opacity = '1';
 
       function subTick() {
         subPos++;
-        subtitle.textContent = text.slice(0, subPos) + (subPos < text.length ? '' : '');
         if (subPos < text.length) {
-          // Add blinking cursor while typing
           subtitle.innerHTML = text.slice(0, subPos) + '<span class="tw-cursor"></span>';
-          setTimeout(subTick, subInterval);
+          timer = setTimeout(subTick, subInterval);
         } else {
           subtitle.textContent = text;
-          // CTA fades in slowly after subtitle finishes
-          setTimeout(function () {
+          timer = setTimeout(function () {
             cta.style.transition    = 'opacity 1.2s ease';
             cta.style.opacity       = '1';
             cta.style.pointerEvents = 'auto';
@@ -281,10 +296,16 @@
       subTick();
     }
 
-    // Clear text FIRST (while still opacity:0), then show — prevents any flash
-    h1.innerHTML = '';
-    h1.style.opacity = '1';
-    setTimeout(tick, 150);
+    // Run on load (i18n already applied text at this point)
+    runTypewriter();
+
+    // Re-run when language changes — i18n updates the DOM first, then fires this event
+    document.addEventListener('automify:langchange', function () {
+      // i18n has just updated h1 and subtitle — clear saved originals and re-run
+      h1.removeAttribute('data-tw-original');
+      subtitle.removeAttribute('data-tw-original');
+      runTypewriter();
+    });
   })();
 
   /* ────────────────────────────────────
