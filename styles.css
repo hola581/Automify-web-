@@ -377,7 +377,7 @@ body {
 .hero h1,
 .hero-subtitle,
 .hero .btn-cta {
-  opacity: 0 !important;
+  opacity: 0;
 }
 
 /* Typewriter cursor */
