@@ -26,12 +26,12 @@
 }
 
 :root {
-  --bg:          #ffffff;
+  --bg:          #1A1A1A;
   --blue:        #049BD3;
   --green:       #39FF8E;
   --gradient:    linear-gradient(135deg, #049BD3 0%, #39FF8E 100%);
   --dark:        #0F1117;
-  --body:        #4A5568;
+  --body:        rgba(255, 255, 255, 0.65);
   --card-bg:     rgba(12, 14, 22, 0.84);
   --card-border: rgba(255, 255, 255, 0.09);
   --nav-bg:      rgba(255, 255, 255, 0.88);
@@ -40,15 +40,15 @@
 
 html {
   scroll-behavior: smooth;
-  background: #0F1117;
+  background: #1A1A1A;
   overflow-x: clip; /* clip = no scroll container, so position:fixed stays viewport-relative */
   overscroll-behavior-y: none;
 }
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #ffffff;
-  color: var(--dark);
+  background: #1A1A1A;
+  color: var(--body);
   overflow-x: hidden;
   overscroll-behavior-y: none;
   -webkit-font-smoothing: antialiased;
@@ -57,15 +57,6 @@ body {
 /* ──────────────────────────────────────
    BACKGROUND CANVASES
 ────────────────────────────────────── */
-#particles {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  /* Fills transparent canvas pixels in the top status-bar safe area on iOS */
-  background: linear-gradient(to bottom, rgba(225, 248, 255, 0.7) 0%, transparent 7%);
-}
-
 #globe {
   position: fixed;
   top: 0;
@@ -201,18 +192,20 @@ body {
   left: 50%;
   transform: translateX(-50%) translateY(-6px);
   list-style: none;
-  background: #ffffff;
+  background: rgba(30, 30, 32, 0.96);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
   border-radius: 14px;
   box-shadow:
-    0 8px 32px rgba(4, 155, 211, 0.14),
-    0 2px 8px rgba(0, 0, 0, 0.08);
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.2);
   padding: 14px 8px 8px; /* top padding bridges the visual gap */
   min-width: 170px;
   opacity: 0;
   pointer-events: none;
   /* show fast, hide slowly so there's time to move mouse across */
   transition: opacity 0.15s ease 0.25s, transform 0.15s ease 0.25s;
-  border: 1px solid rgba(4, 155, 211, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .nav-dropdown:hover .dropdown-menu {
@@ -415,13 +408,65 @@ body {
   font-style: italic;
 }
 
+.hero-bottom {
+  position: absolute;
+  bottom: 28px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
 .hero-subtitle {
-  font-size: 17px;
-  line-height: 1.65;
-  color: var(--body);
-  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.6);
-  margin-bottom: 22px;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.38);
+  text-shadow: none;
+  margin: 0;
   font-weight: 400;
+}
+
+.hero-scroll-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  color: rgba(255, 255, 255, 0.38);
+  text-decoration: none;
+  transition: color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.hero-scroll-arrow svg {
+  width: 16px;
+  height: 16px;
+}
+
+.hero-scroll-arrow:hover {
+  color: var(--blue);
+  transform: translateY(3px);
+  box-shadow: 0 4px 16px rgba(4, 155, 211, 0.18);
+}
+
+/* "automify" brand name inside the hero subtitle — matches the logo */
+.brand-name {
+  font-family: 'Creato Display', sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  text-shadow: none;
+  background: linear-gradient(90deg, #049bd3 0%, #39ff8e 62.8%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* CTA button */
@@ -429,12 +474,12 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   font-family: inherit;
   color: #ffffff;
   text-decoration: none;
-  padding: 15px 40px;
+  padding: 18px 56px;
   border-radius: 50px;
   background: linear-gradient(
     135deg,
@@ -884,7 +929,7 @@ body {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(18, 18, 20, 0.94);
   backdrop-filter: blur(32px) saturate(180%);
   -webkit-backdrop-filter: blur(32px) saturate(180%);
   z-index: 199;
@@ -977,7 +1022,8 @@ body {
   /* Hero */
   .hero { padding-top: 100px; padding-bottom: 60px; gap: 0; justify-content: flex-start; }
   .hero h1 { font-size: clamp(38px, 10vw, 52px); letter-spacing: -1.5px; }
-  .hero-subtitle { font-size: 16px; }
+  .hero-bottom { bottom: 20px; }
+  .hero-subtitle { font-size: 12px; }
   .btn-cta { padding: 13px 32px; font-size: 15px; }
 
   /* Stat cards — make relative/stacked */

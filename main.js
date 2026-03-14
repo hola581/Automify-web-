@@ -4,78 +4,12 @@
 (function () {
   'use strict';
 
-  /* ────────────────────────────────────
-     1. PARTICLE CANVAS
-  ──────────────────────────────────── */
-  const pCanvas = document.getElementById('particles');
-  const pCtx    = pCanvas ? pCanvas.getContext('2d') : null;
-
-  if (pCtx) {
-    // Measure safe-area insets via sentinel elements so particles fill the
-    // status-bar zone (top) and home-indicator zone (bottom) on iOS Safari.
-    function getSafeInsets() {
-      const t = document.createElement('div');
-      const b = document.createElement('div');
-      t.style.cssText = 'position:fixed;top:0;height:env(safe-area-inset-top,0px);left:0;right:0;pointer-events:none;visibility:hidden;';
-      b.style.cssText = 'position:fixed;bottom:0;height:env(safe-area-inset-bottom,0px);left:0;right:0;pointer-events:none;visibility:hidden;';
-      document.documentElement.appendChild(t);
-      document.documentElement.appendChild(b);
-      const insets = { top: t.getBoundingClientRect().height || 0, bottom: b.getBoundingClientRect().height || 0 };
-      t.remove(); b.remove();
-      return insets;
-    }
-
-    let W = innerWidth;
-    const _i = getSafeInsets();
-    let H = innerHeight + _i.top + _i.bottom;
-    pCanvas.width  = W;
-    pCanvas.height = H;
-
-    // Generate particles
-    const COUNT = 90;
-    const particles = Array.from({ length: COUNT }, () => ({
-      x:     Math.random() * W,
-      y:     Math.random() * H,
-      r:     Math.random() * 1.6 + 0.4,
-      alpha: Math.random() * 0.22 + 0.06,
-      vx:   (Math.random() - 0.5) * 0.18,
-      vy:   (Math.random() - 0.5) * 0.18,
-      // Randomly tint blue or green
-      color: Math.random() > 0.55 ? '4,155,211' : '57,255,142',
-    }));
-
-    function drawParticles() {
-      pCtx.clearRect(0, 0, W, H);
-      for (const p of particles) {
-        pCtx.beginPath();
-        pCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        pCtx.fillStyle = `rgba(${p.color}, ${p.alpha})`;
-        pCtx.fill();
-
-        // Move
-        p.x += p.vx;
-        p.y += p.vy;
-
-        // Wrap edges
-        if (p.x < -2) p.x = W + 2;
-        else if (p.x > W + 2) p.x = -2;
-        if (p.y < -2) p.y = H + 2;
-        else if (p.y > H + 2) p.y = -2;
-      }
-      requestAnimationFrame(drawParticles);
-    }
-
-    drawParticles();
-
-    window.addEventListener('resize', () => {
-      const _ri = getSafeInsets();
-      W = pCanvas.width  = innerWidth;
-      H = pCanvas.height = innerHeight + _ri.top + _ri.bottom;
-    }, { passive: true });
-  }
+  // Prevent browser from restoring scroll position on refresh
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
 
   /* ────────────────────────────────────
-     2. PROGRESS BAR ANIMATION (on load)
+     1. PROGRESS BAR ANIMATION (on load)
   ──────────────────────────────────── */
   window.addEventListener('load', () => {
     const bar = document.querySelector('.stat-progress-bar');
@@ -285,7 +219,8 @@
           subtitle.innerHTML = text.slice(0, subPos) + '<span class="tw-cursor"></span>';
           timer = setTimeout(subTick, subInterval);
         } else {
-          subtitle.textContent = text;
+          // Restore full text, then wrap "Automify" with logo-style branding
+          subtitle.innerHTML = text.replace('automify', '<span class="brand-name">automify</span>');
           timer = setTimeout(function () {
             cta.style.transition    = 'opacity 1.2s ease';
             cta.style.opacity       = '1';

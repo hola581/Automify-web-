@@ -26,8 +26,8 @@
 
       // ── INDEX · HERO
       'hero.h1':       'Focus Your Efforts<br>On What <em>Matters</em>',
-      'hero.subtitle': 'Powered by Automify',
-      'hero.cta':      'Speak to an Expert \u00a0\u2192',
+      'hero.subtitle': 'Powered by automify',
+      'hero.cta':      'Speak to an Expert',
 
       // ── INDEX · STAT CARDS
       'stat.left.label':  'Automation Flows',
@@ -212,8 +212,8 @@
 
       // ── INDEX · HERO
       'hero.h1':       'Enfoca Tu Energ\u00eda<br>En Lo Que <em>Importa</em>',
-      'hero.subtitle': 'Impulsado por Automify',
-      'hero.cta':      'Hablar con un Experto \u00a0\u2192',
+      'hero.subtitle': 'Impulsado por automify',
+      'hero.cta':      'Hablar con un Experto',
 
       // ── INDEX · STAT CARDS
       'stat.left.label':  'Flujos de Automatizaci\u00f3n',
