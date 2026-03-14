@@ -373,6 +373,13 @@ body {
   padding: 0 24px;
 }
 
+/* Hidden until typewriter JS takes over — prevents flash on load */
+.hero h1,
+.hero-subtitle,
+.hero .btn-cta {
+  opacity: 0;
+}
+
 /* Typewriter cursor */
 .tw-cursor {
   display: inline-block;
