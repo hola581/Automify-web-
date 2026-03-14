@@ -181,6 +181,15 @@
       'cookie.policy': 'Cookie Policy',
       'cookie.accept': 'Accept All',
       'cookie.reject': 'Reject Non-Essential',
+
+      // ── CONTACT MODAL
+      'contact.title':        'Get in Touch',
+      'contact.subtitle':     'Choose how you\'d like to reach us.',
+      'contact.phone':        'Phone',
+      'contact.whatsapp':     'WhatsApp',
+      'contact.email':        'Email',
+      'contact.calendar':     'Book a Meeting',
+      'contact.calendar.sub': 'Schedule a free 30-min call',
     },
 
     /* ══════════════════════════════════════
@@ -358,6 +367,15 @@
       'cookie.policy': 'Pol\u00edtica de Cookies',
       'cookie.accept': 'Aceptar Todo',
       'cookie.reject': 'Rechazar No Esenciales',
+
+      // ── CONTACT MODAL
+      'contact.title':        'Cont\u00e1ctanos',
+      'contact.subtitle':     'Elige c\u00f3mo quieres ponerte en contacto con nosotros.',
+      'contact.phone':        'Tel\u00e9fono',
+      'contact.whatsapp':     'WhatsApp',
+      'contact.email':        'Email',
+      'contact.calendar':     'Reservar una Reuni\u00f3n',
+      'contact.calendar.sub': 'Agenda una llamada gratuita de 30 min',
     },
   };
 
