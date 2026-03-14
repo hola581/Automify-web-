@@ -175,7 +175,96 @@
   }
 
   /* ────────────────────────────────────
-     6. FEATURE CARDS — fade in on scroll
+     6. HERO TYPEWRITER
+  ──────────────────────────────────── */
+  (function () {
+    var h1       = document.querySelector('.hero h1');
+    var subtitle = document.querySelector('.hero-subtitle');
+    var cta      = document.querySelector('.hero .btn-cta');
+
+    if (!h1 || !subtitle || !cta) return;
+
+    // Hide subtitle and CTA immediately — no flash
+    subtitle.style.opacity      = '0';
+    cta.style.opacity           = '0';
+    cta.style.pointerEvents     = 'none';
+
+    var originalHTML = h1.innerHTML;
+
+    // Build a flat token array from the h1 HTML tree
+    var tokens = [];
+    var tmp = document.createElement('div');
+    tmp.innerHTML = originalHTML;
+
+    function walkNode(node, ctx) {
+      if (node.nodeType === 3) {
+        for (var i = 0; i < node.textContent.length; i++) {
+          tokens.push({ type: 'char', char: node.textContent[i], ctx: ctx });
+        }
+      } else if (node.nodeType === 1) {
+        var tag = node.tagName.toLowerCase();
+        if (tag === 'br') {
+          tokens.push({ type: 'br' });
+        } else {
+          for (var j = 0; j < node.childNodes.length; j++) {
+            walkNode(node.childNodes[j], tag);
+          }
+        }
+      }
+    }
+    for (var i = 0; i < tmp.childNodes.length; i++) walkNode(tmp.childNodes[i], null);
+
+    var charCount = tokens.filter(function (t) { return t.type === 'char'; }).length;
+    var interval  = 2600 / charCount; // ~2.6 s total
+    var pos = 0;
+
+    function buildHTML(upTo) {
+      var html = '';
+      var openTag = null;
+      for (var i = 0; i < upTo; i++) {
+        var tok = tokens[i];
+        if (tok.type === 'br') {
+          if (openTag) { html += '</' + openTag + '>'; openTag = null; }
+          html += '<br>';
+        } else {
+          if (tok.ctx !== openTag) {
+            if (openTag) html += '</' + openTag + '>';
+            if (tok.ctx) html += '<' + tok.ctx + '>';
+            openTag = tok.ctx;
+          }
+          html += tok.char;
+        }
+      }
+      if (openTag) html += '</' + openTag + '>';
+      return html;
+    }
+
+    function tick() {
+      pos++;
+      h1.innerHTML = buildHTML(pos) + '<span class="tw-cursor"></span>';
+
+      if (pos < tokens.length) {
+        setTimeout(tick, interval);
+      } else {
+        // Typing done — restore original HTML, then reveal subtitle and CTA
+        setTimeout(function () {
+          h1.innerHTML = originalHTML;
+          subtitle.style.transition = 'opacity 0.6s ease';
+          subtitle.style.opacity    = '1';
+          setTimeout(function () {
+            cta.style.transition    = 'opacity 0.6s ease';
+            cta.style.opacity       = '1';
+            cta.style.pointerEvents = 'auto';
+          }, 500);
+        }, 150);
+      }
+    }
+
+    setTimeout(tick, 300);
+  })();
+
+  /* ────────────────────────────────────
+     7. FEATURE CARDS — fade in on scroll
   ──────────────────────────────────── */
   const featureCards = document.querySelectorAll('.feature-card');
 
