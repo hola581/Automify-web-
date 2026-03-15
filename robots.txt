@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /onboarding.html
+Disallow: /api/
+
+Sitemap: https://automify.io/sitemap.xml
