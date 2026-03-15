@@ -55,7 +55,9 @@ body {
 }
 
 @media (prefers-color-scheme: light) {
-  html, body { background: #ffffff; }
+  html { background: #ffffff !important; }
+  body { background: #ffffff !important; }
+  #globe { background: #ffffff !important; }
 
   .hero-subtitle {
     color: rgba(0, 0, 0, 0.65);
