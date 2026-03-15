@@ -60,13 +60,13 @@ body {
   #globe { background: #ffffff !important; }
 
   .hero-subtitle {
-    color: rgba(0, 0, 0, 0.65);
+    color: #000000 !important;
   }
 
   .hero-scroll-arrow {
-    color: rgba(0, 0, 0, 0.65);
-    border-color: rgba(0, 0, 0, 0.30);
-    background: rgba(0, 0, 0, 0.05);
+    color: #000000 !important;
+    border-color: #000000 !important;
+    background: rgba(0, 0, 0, 0.05) !important;
   }
 }
 
