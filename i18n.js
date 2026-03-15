@@ -11,6 +11,7 @@
     ══════════════════════════════════════ */
     en: {
       // ── NAV
+      'nav.home':       'Home',
       'nav.about':      'About',
       'nav.solutions':  'Solutions',
       'nav.contact':    'Contact',
@@ -229,6 +230,7 @@
     ══════════════════════════════════════ */
     es: {
       // ── NAV
+      'nav.home':       'Inicio',
       'nav.about':      'Nosotros',
       'nav.solutions':  'Soluciones',
       'nav.contact':    'Contacto',
