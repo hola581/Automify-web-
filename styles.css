@@ -85,6 +85,7 @@ body::after {
   opacity: 0.75;
   pointer-events: none;
   z-index: 0;
+  translate: var(--plane-tx, 0px) var(--plane-ty, 0px);
 }
 
 @media (max-width: 600px) {
@@ -1130,7 +1131,7 @@ body::after {
   .hero-subtitle { font-size: 12px; }
   .btn-cta { padding: 13px 32px; font-size: 15px; }
   /* On mobile, btn-cta stays in flow after h1 */
-  .hero-cta-center { position: relative; top: auto; left: auto; transform: none; margin-top: 28px; }
+  .hero-cta-center { position: relative; top: auto; left: auto; transform: none; margin-top: 12px; }
 
   /* Stat cards row — absolute, side by side, below airplane */
   .stat-cards-row {
