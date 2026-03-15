@@ -28,7 +28,7 @@
       'nav.sol.tappy':  'Tappy',
 
       // ── INDEX · HERO
-      'hero.h1':       'Focus Your Efforts<br>On What <em>Matters</em>',
+      'hero.h1':       'Automate the Work.<br>Focus On What <em>Matters</em>',
       'hero.subtitle': 'Powered by automify',
       'hero.cta':      'Speak to an Expert',
 
@@ -255,7 +255,7 @@
       'nav.sol.tappy':  'Tappy',
 
       // ── INDEX · HERO
-      'hero.h1':       'Enfoca Tu Energ\u00eda<br>En Lo Que <em>Importa</em>',
+      'hero.h1':       'Automatiza el Trabajo.<br>Enfoca En Lo Que <em>Importa</em>',
       'hero.subtitle': 'Impulsado por automify',
       'hero.cta':      'Hablar con un Experto',
 

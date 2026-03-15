@@ -45,6 +45,8 @@
   <meta property="og:description" content="AI-powered automation for sales, marketing, and operations. Plus a free custom website for your business — no code, no agency, just results.">
   <meta property="og:image" content="https://www.automify.xyz/og-image.png">
   <meta property="og:site_name" content="Automify">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="es_ES">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -67,6 +69,11 @@
           "url": "https://www.automify.xyz/favicon.svg"
         },
         "description": "Automify delivers AI-powered business automation for sales, marketing, talent management, and operations.",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "availableLanguage": ["English", "Spanish"]
+        },
         "sameAs": []
       },
       {
@@ -94,12 +101,33 @@
   }
   </script>
 
+  <!-- JSON-LD: SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Automify",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "description": "AI-powered business automation platform covering sales, marketing, customer acquisition, talent management, and operational efficiency — with a free custom website included.",
+    "url": "https://www.automify.xyz/",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "GBP",
+      "description": "Free custom website with no upfront cost"
+    },
+    "publisher": { "@id": "https://www.automify.xyz/#organization" }
+  }
+  </script>
+
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" defer></script>
   <!-- Apply saved theme before first paint to avoid flash -->
   <script>
     (function(){
@@ -205,7 +233,7 @@
 
     <!-- Text content -->
     <div class="hero-content">
-      <h1 data-i18n-html="hero.h1">Focus Your Efforts<br>On What <em>Matters</em></h1>
+      <h1 data-i18n-html="hero.h1">Automate the Work.<br>Focus On What <em>Matters</em></h1>
     </div>
 
     <a href="#" class="btn-cta hero-cta-center" onclick="AutomifyContact.open();return false;"><span data-i18n-html="hero.cta">Speak to an Expert</span></a>
