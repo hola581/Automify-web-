@@ -1757,7 +1757,7 @@ body::after {
   border-radius: 12px;
   padding: 13px 16px;
   font-family: 'Inter', sans-serif;
-  font-size: 14px;
+  font-size: 16px; /* ≥16px prevents iOS auto-zoom on focus */
   color: #fff;
   outline: none;
   transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
@@ -2105,7 +2105,10 @@ body::after {
 
 /* Onboarding responsive */
 @media (max-width: 768px) {
-  .ob-main { padding: 100px 16px 80px; }
+  .ob-main {
+    padding: 100px 16px 80px;
+    min-height: unset; /* evita que el teclado virtual recalcule y rompa el layout */
+  }
 }
 
 @media (max-width: 640px) {

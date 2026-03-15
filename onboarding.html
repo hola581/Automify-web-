@@ -9,7 +9,7 @@
   })(window,document,'script','dataLayer','GTM-T9L2SRT7');</script>
   <!-- End Google Tag Manager -->
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
   <title>Automify — Get Your Free Website</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -547,18 +547,30 @@
   }
 
   // ── NAV ──────────────────────────────────────────────────
+  function dismissKeyboardThenScroll(action) {
+    // Blur active input so the keyboard closes before scrolling
+    if (document.activeElement && document.activeElement !== document.body) {
+      document.activeElement.blur();
+    }
+    // Small delay lets the keyboard close and viewport restore before scroll
+    setTimeout(function () {
+      action();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 120);
+  }
+
   function nextStep() {
     if (!validateStep(currentStep)) return;
     currentStep++;
     showStep(currentStep);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    dismissKeyboardThenScroll(function () {});
   }
 
   function prevStep() {
     if (currentStep <= 1) return;
     currentStep--;
     showStep(currentStep);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    dismissKeyboardThenScroll(function () {});
   }
 
   // ── COLOUR PICKERS ───────────────────────────────────────
