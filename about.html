@@ -244,17 +244,34 @@
       .about-intro       { max-width: min(84vw, 1100px); }
       .about-intro p     { font-size: 19px; }
       .about-section     { max-width: min(92vw, 1540px); padding: 70px 48px 90px; }
-      .about-cards       { gap: 32px; }
-      .about-card        { padding: 40px 34px; }
-      .about-card h3     { font-size: 20px; }
-      .about-card p      { font-size: 15.5px; }
-      .about-products    { gap: 22px; }
-      .about-product     { padding: 30px 24px; }
-      .about-product h4  { font-size: 15.5px; }
-      .about-product p   { font-size: 13.5px; }
+      /* Approach cards */
+      .about-cards       { gap: 36px; }
+      .about-card        { padding: 48px 42px; }
+      .about-card-num    { font-size: 48px; margin-bottom: 18px; }
+      .about-card h3     { font-size: 23px; margin-bottom: 14px; }
+      .about-card p      { font-size: 17px; line-height: 1.65; }
+      /* Product cards */
+      .about-products    { gap: 24px; }
+      .about-product     { padding: 34px 28px; }
+      .about-product-icon { width: 52px; height: 52px; border-radius: 14px; margin-bottom: 18px; }
+      .about-product-icon svg { width: 24px; height: 24px; }
+      .about-product h4  { font-size: 17px; margin-bottom: 8px; }
+      .about-product p   { font-size: 14.5px; line-height: 1.55; }
+      /* Stats */
       .about-stats       { max-width: min(80vw, 1100px); }
-      .about-stat-value  { font-size: 54px; }
-      .about-stat-label  { font-size: 15px; }
+      .about-stat        { padding: 42px 28px; }
+      .about-stat-value  { font-size: 64px; margin-bottom: 12px; }
+      .about-stat-label  { font-size: 16px; line-height: 1.5; }
+    }
+
+    /* ── MOBILE: tighter padding so text fills cards better ── */
+    @media (max-width: 768px) {
+      .about-card        { padding: 26px 22px; }
+      .about-card h3     { font-size: 18px; }
+      .about-card p      { font-size: 14.5px; }
+      .about-product     { padding: 20px 16px; }
+      .about-product h4  { font-size: 14px; }
+      .about-product p   { font-size: 12.5px; }
     }
 
     /* ── RESPONSIVE ── */
