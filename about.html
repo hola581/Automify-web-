@@ -236,6 +236,27 @@
     html.is-light .about-stat        { border-color: rgba(0,0,0,0.07) !important; }
     html.is-light .about-divider     { border-color: rgba(0,0,0,0.07) !important; }
 
+    /* ── DESKTOP SCALING ── */
+    @media (min-width: 769px) {
+      .about-hero        { max-width: min(88vw, 1200px); padding: 148px 48px 90px; }
+      .about-hero-title  { font-size: clamp(56px, 7.2vw, 104px); }
+      .about-hero-sub    { font-size: 20px; max-width: min(62vw, 780px); }
+      .about-intro       { max-width: min(84vw, 1100px); }
+      .about-intro p     { font-size: 19px; }
+      .about-section     { max-width: min(92vw, 1540px); padding: 70px 48px 90px; }
+      .about-cards       { gap: 32px; }
+      .about-card        { padding: 40px 34px; }
+      .about-card h3     { font-size: 20px; }
+      .about-card p      { font-size: 15.5px; }
+      .about-products    { gap: 22px; }
+      .about-product     { padding: 30px 24px; }
+      .about-product h4  { font-size: 15.5px; }
+      .about-product p   { font-size: 13.5px; }
+      .about-stats       { max-width: min(80vw, 1100px); }
+      .about-stat-value  { font-size: 54px; }
+      .about-stat-label  { font-size: 15px; }
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .about-products { grid-template-columns: repeat(3, 1fr); }

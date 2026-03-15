@@ -2618,3 +2618,45 @@ body::after {
   #contact-modal { padding: 28px 20px 24px; }
   .contact-title { font-size: 22px; }
 }
+
+/* ──────────────────────────────────────
+   DESKTOP SCALING — fill more screen width
+   Only applies on screens wider than 768px
+────────────────────────────────────── */
+@media (min-width: 769px) {
+
+  /* ── Navbar: wider pill ── */
+  .navbar        { max-width: calc(100% - 48px); }
+  .nav-container { max-width: none; padding: 0 52px; }
+
+  /* ── Hero heading ── */
+  .hero h1       { font-size: clamp(64px, 7.2vw, 108px); }
+  .hero-content  { max-width: min(88vw, 1140px); }
+
+  /* ── Promo section ── */
+  .promo-inner   { max-width: min(88vw, 1340px); }
+  .promo-heading { font-size: clamp(68px, 8.2vw, 130px); }
+  .promo-sub     { max-width: min(66vw, 880px); font-size: 20px; }
+  .promo-steps   { gap: 24px; }
+  .promo-card    { padding: 36px 32px; }
+  .promo-card h3 { font-size: 20px; }
+  .promo-card p  { font-size: 16px; }
+
+  /* ── Solutions hero ── */
+  .sol-hero-inner { max-width: min(84vw, 1140px); }
+  .sol-hero-title { font-size: clamp(60px, 7vw, 104px); }
+  .sol-hero-sub   { max-width: min(62vw, 800px); font-size: 20px; }
+
+  /* ── Solutions cards grid ── */
+  .sol-grid       { max-width: min(92vw, 1540px); gap: 28px; }
+  .sol-card       { padding: 42px 36px 36px; }
+  .sol-card-num   { font-size: 52px; }
+  .sol-card-title { font-size: 24px; }
+  .sol-card-desc  { font-size: 15.5px; }
+  .sol-features li { font-size: 14.5px; }
+
+  /* ── Solutions CTA ── */
+  .sol-cta-inner  { max-width: min(72vw, 960px); }
+  .sol-cta-title  { font-size: clamp(54px, 6.2vw, 94px); }
+  .sol-cta-sub    { max-width: min(58vw, 700px); font-size: 19px; }
+}
