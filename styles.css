@@ -54,20 +54,73 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* ── THEME TOGGLE BUTTON ── */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  padding: 0;
+}
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.9);
+}
+.theme-icon { width: 14px; height: 14px; display: block; }
+.theme-icon-moon { display: none; }
+
+/* ── LIGHT MODE — system preference (no manual dark override) ── */
 @media (prefers-color-scheme: light) {
-  html { background: #ffffff !important; }
-  body { background: #ffffff !important; }
-  #globe { background: #ffffff !important; }
-
-  .hero-subtitle {
-    color: #000000 !important;
-  }
-
-  .hero-scroll-arrow {
+  html:not(.is-dark) { background: #ffffff !important; }
+  html:not(.is-dark) body { background: #ffffff !important; }
+  html:not(.is-dark) #globe { background: #ffffff !important; }
+  html:not(.is-dark) .hero-subtitle { color: #000000 !important; }
+  html:not(.is-dark) .hero-scroll-arrow {
     color: #8E8E93 !important;
     border-color: #8E8E93 !important;
     background: rgba(142, 142, 147, 0.08) !important;
   }
+  html:not(.is-dark) .theme-icon-sun  { display: none; }
+  html:not(.is-dark) .theme-icon-moon { display: block; }
+  html:not(.is-dark) .theme-toggle {
+    background: rgba(0, 0, 0, 0.06);
+    border-color: rgba(0, 0, 0, 0.15);
+    color: rgba(0, 0, 0, 0.50);
+  }
+  html:not(.is-dark) .theme-toggle:hover {
+    background: rgba(0, 0, 0, 0.11);
+    color: rgba(0, 0, 0, 0.80);
+  }
+}
+
+/* ── LIGHT MODE — manual override ── */
+html.is-light { background: #ffffff !important; }
+html.is-light body { background: #ffffff !important; }
+html.is-light #globe { background: #ffffff !important; }
+html.is-light .hero-subtitle { color: #000000 !important; }
+html.is-light .hero-scroll-arrow {
+  color: #8E8E93 !important;
+  border-color: #8E8E93 !important;
+  background: rgba(142, 142, 147, 0.08) !important;
+}
+html.is-light .theme-icon-sun  { display: none; }
+html.is-light .theme-icon-moon { display: block; }
+html.is-light .theme-toggle {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.50);
+}
+html.is-light .theme-toggle:hover {
+  background: rgba(0, 0, 0, 0.11);
+  color: rgba(0, 0, 0, 0.80);
 }
 
 /* ── Paper airplane background decoration ── */
