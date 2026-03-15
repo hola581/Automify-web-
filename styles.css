@@ -149,6 +149,41 @@ html.is-light .sol-carousel-dot.active {
   border-color: #39ff8e !important;
 }
 
+/* Gradient blend between cards and dots — mobile light mode only */
+@media (max-width: 600px) {
+  html.is-light .sol-grid-section {
+    position: relative;
+  }
+  html.is-light .sol-grid-section::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 52px;
+    height: 90px;
+    background: linear-gradient(to bottom, transparent 0%, #ffffff 100%);
+    pointer-events: none;
+    z-index: 2;
+  }
+}
+
+@media (prefers-color-scheme: light) and (max-width: 600px) {
+  html:not(.is-dark) .sol-grid-section {
+    position: relative;
+  }
+  html:not(.is-dark) .sol-grid-section::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 52px;
+    height: 90px;
+    background: linear-gradient(to bottom, transparent 0%, #ffffff 100%);
+    pointer-events: none;
+    z-index: 2;
+  }
+}
+
 /* ── Paper airplane background decoration ── */
 @keyframes planeEntryMobile {
   from {
