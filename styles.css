@@ -45,6 +45,10 @@ html {
   overscroll-behavior-y: none;
 }
 
+@media (prefers-color-scheme: light) {
+  html, body { background: #ffffff; }
+}
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background: #1A1A1A;
@@ -364,7 +368,6 @@ body::after {
 
 .btn-signup:hover {
   opacity: 0.94;
-  transform: translateY(-1px);
   box-shadow:
     0 6px 24px rgba(4, 155, 211, 0.44),
     0 0 40px rgba(57, 255, 142, 0.28),
@@ -561,7 +564,6 @@ body::after {
 }
 
 .btn-cta:hover {
-  transform: translateY(-2px);
   background: linear-gradient(
     135deg,
     rgba(4, 155, 211, 0.42) 0%,
@@ -926,7 +928,6 @@ body::after {
 }
 
 .btn-promo-cta:hover {
-  transform: translateY(-3px) scale(1.02);
   background: linear-gradient(
     135deg,
     rgba(4, 155, 211, 0.42) 0%,
@@ -2053,7 +2054,6 @@ body::after {
 
 .cookie-btn:hover {
   opacity: 0.85;
-  transform: translateY(-1px);
 }
 
 .cookie-reject {
@@ -2068,13 +2068,29 @@ body::after {
 }
 
 @media (max-width: 520px) {
+  #cookie-banner {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    width: auto;
+    transform: translateY(120px);
+  }
+  #cookie-banner.cookie-visible {
+    transform: translateY(0);
+  }
+  #cookie-banner.cookie-hiding {
+    transform: translateY(120px);
+  }
   .cookie-inner {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 14px;
+    padding: 16px;
   }
   .cookie-actions {
+    display: flex;
     width: 100%;
+    gap: 10px;
   }
   .cookie-btn {
     flex: 1;
