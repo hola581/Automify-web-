@@ -45,10 +45,6 @@ html {
   overscroll-behavior-y: none;
 }
 
-@media (prefers-color-scheme: light) {
-  html, body { background: #ffffff; }
-}
-
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background: #1A1A1A;
@@ -56,6 +52,10 @@ body {
   overflow-x: hidden;
   overscroll-behavior-y: none;
   -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-color-scheme: light) {
+  html, body { background: #ffffff; }
 }
 
 /* ── Paper airplane background decoration ── */
