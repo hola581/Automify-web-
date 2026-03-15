@@ -64,9 +64,9 @@ body {
   }
 
   .hero-scroll-arrow {
-    color: #000000 !important;
-    border-color: #000000 !important;
-    background: rgba(0, 0, 0, 0.05) !important;
+    color: #8E8E93 !important;
+    border-color: #8E8E93 !important;
+    background: rgba(142, 142, 147, 0.08) !important;
   }
 }
 
