@@ -118,6 +118,14 @@ body {
   html:not(.is-dark) .nav-mobile-links li {
     border-color: rgba(0, 0, 0, 0.08) !important;
   }
+  html:not(.is-dark) .ob-dot {
+    background: transparent !important;
+    border-color: rgba(0, 0, 0, 0.22) !important;
+    color: rgba(0, 0, 0, 0.35) !important;
+  }
+  html:not(.is-dark) .ob-connector {
+    background: rgba(0, 0, 0, 0.15) !important;
+  }
 }
 
 /* ── LIGHT MODE — manual override ── */
@@ -159,6 +167,14 @@ html.is-light .nav-mobile-menu {
 }
 html.is-light .nav-mobile-links li {
   border-color: rgba(0, 0, 0, 0.08) !important;
+}
+html.is-light .ob-dot {
+  background: transparent !important;
+  border-color: rgba(0, 0, 0, 0.22) !important;
+  color: rgba(0, 0, 0, 0.35) !important;
+}
+html.is-light .ob-connector {
+  background: rgba(0, 0, 0, 0.15) !important;
 }
 
 /* Gradient blend between cards and dots — mobile light mode only */
