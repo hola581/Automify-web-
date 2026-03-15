@@ -112,6 +112,12 @@ body {
     background: #39ff8e !important;
     border-color: #39ff8e !important;
   }
+  html:not(.is-dark) .nav-mobile-menu {
+    background: rgba(255, 255, 255, 0.97) !important;
+  }
+  html:not(.is-dark) .nav-mobile-links li {
+    border-color: rgba(0, 0, 0, 0.08) !important;
+  }
 }
 
 /* ── LIGHT MODE — manual override ── */
@@ -147,6 +153,12 @@ html.is-light .sol-carousel-dot {
 html.is-light .sol-carousel-dot.active {
   background: #39ff8e !important;
   border-color: #39ff8e !important;
+}
+html.is-light .nav-mobile-menu {
+  background: rgba(255, 255, 255, 0.97) !important;
+}
+html.is-light .nav-mobile-links li {
+  border-color: rgba(0, 0, 0, 0.08) !important;
 }
 
 /* Gradient blend between cards and dots — mobile light mode only */
