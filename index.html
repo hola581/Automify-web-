@@ -101,6 +101,46 @@
   }
   </script>
 
+  <!-- JSON-LD: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is the free website really free?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — completely. We build your website at no upfront cost. You only pay once you've seen the finished result and you love it. No hidden fees, no contracts, no risk." }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take to build my website?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Most websites are delivered within 5–7 business days of receiving your brief. Complex projects with many pages may take a few days longer — we'll always give you a clear timeline upfront." }
+      },
+      {
+        "@type": "Question",
+        "name": "What industries do you work with?",
+        "acceptedAnswer": { "@type": "Answer", "text": "We work across hospitality, retail, services, e-commerce, real estate, and more — in the UK and Spain. If you run a business and have repetitive tasks, we can automate them." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need any technical knowledge?",
+        "acceptedAnswer": { "@type": "Answer", "text": "None at all. You fill in a simple brief about your brand and we handle everything — design, development, and delivery. No code, no tools, no learning curve." }
+      },
+      {
+        "@type": "Question",
+        "name": "What automation solutions does Automify offer?",
+        "acceptedAnswer": { "@type": "Answer", "text": "We cover the full business lifecycle: Customer Acquisition, Sales, Revenue, Marketing, Talent Management, Operational Efficiency, customer loyalty (Loyaltι), and NFC-powered Google reviews (Tappy)." }
+      },
+      {
+        "@type": "Question",
+        "name": "What if I don't like the website?",
+        "acceptedAnswer": { "@type": "Answer", "text": "You don't pay. Simple as that. If you're not completely happy with what we deliver, you owe us nothing. We'd rather earn your trust than your money." }
+      }
+    ]
+  }
+  </script>
+
   <!-- JSON-LD: SoftwareApplication -->
   <script type="application/ld+json">
   {
@@ -332,6 +372,48 @@
     </div>
   </section>
 
+  <!-- ── FAQ SECTION ── -->
+  <section class="faq-section" id="faq">
+    <div class="faq-inner">
+      <div class="promo-tag" style="margin-bottom:28px;">✦ &nbsp;FAQ</div>
+      <h2 class="faq-title">Frequently Asked <em>Questions</em></h2>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Is the free website really free?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>Yes — completely. We build your website at no upfront cost. You only pay once you've seen the finished result and you love it. No hidden fees, no contracts, no risk.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">How long does it take to build my website?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>Most websites are delivered within 5–7 business days of receiving your brief. Complex projects with many pages may take a few days longer — we'll always give you a clear timeline upfront.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What industries do you work with?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>We work across hospitality, retail, services, e-commerce, real estate, and more — in the UK and Spain. If you run a business and have repetitive tasks, we can automate them.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Do I need any technical knowledge?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>None at all. You fill in a simple brief about your brand and we handle everything — design, development, and delivery. No code, no tools, no learning curve.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What automation solutions does Automify offer?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>We cover the full business lifecycle: Customer Acquisition, Sales, Revenue, Marketing, Talent Management, Operational Efficiency, customer loyalty (Loyaltι), and NFC-powered Google reviews (Tappy).</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What if I don't like the website?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>You don't pay. Simple as that. If you're not completely happy with what we deliver, you owe us nothing. We'd rather earn your trust than your money.</p></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <script src="i18n.js"></script>
   <script src="main.js"></script>
   <script src="cookies.js"></script>
@@ -388,6 +470,23 @@
       }
       loop();
     })();
+  </script>
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-q').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var item = btn.parentElement;
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(function(el) {
+          el.classList.remove('open');
+          el.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
   </script>
 </body>
 </html>
