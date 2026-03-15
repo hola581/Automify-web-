@@ -3,4 +3,4 @@ Allow: /
 Disallow: /onboarding.html
 Disallow: /api/
 
-Sitemap: https://automify.xyz/sitemap.xml
+Sitemap: https://www.automify.xyz/sitemap.xml
