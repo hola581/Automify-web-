@@ -109,9 +109,8 @@ module.exports = async function handler(req, res) {
     res.status(200).json({ reply: result.body.content[0].text });
 
   } catch (e) {
-    console.error('Chat API error:', e.message || e);
-    res.status(200).json({ reply: isEs
-      ? 'Para más ayuda contacta con nosotros: hola@automify.xyz | +34 658 941 796'
-      : 'For more help contact us: hola@automify.xyz | +44 7860 230825' });
+    var errMsg = e && e.message ? e.message : String(e);
+    console.error('Chat API error:', errMsg);
+    res.status(200).json({ reply: '[DEBUG] ' + errMsg });
   }
 };
