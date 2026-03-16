@@ -76,8 +76,12 @@
   }
 
   function renderSectorBtns() {
+    var es = getLang() === 'es';
+    var sectors = es
+      ? ['Hostelería', 'Retail', 'Servicios', 'E-commerce', 'Inmobiliaria', 'Otro']
+      : ['Hospitality', 'Retail', 'Services', 'E-commerce', 'Real Estate', 'Other'];
     var wrap = mkEl('div', { class: 'cb-sectors' });
-    ['Hospitality', 'Retail', 'Services', 'E-commerce', 'Real Estate', 'Other'].forEach(function (s) {
+    sectors.forEach(function (s) {
       var b = mkEl('button', { class: 'cb-sector-btn' });
       b.textContent = s;
       b.addEventListener('click', function () { wrap.remove(); pickSector(s); });
@@ -118,7 +122,7 @@
     S.exchanges++;
     addTyping();
 
-    var payload = { message: text, sector: S.sector, history: S.history.slice(-6) };
+    var payload = { message: text, sector: S.sector, history: S.history.slice(-6), lang: getLang() };
 
     fetch('/api/chat', {
       method: 'POST',
