@@ -1310,7 +1310,7 @@ body::after {
   /* Stat cards row — absolute, side by side, below airplane */
   .stat-cards-row {
     position: absolute;
-    bottom: 64px;
+    bottom: 90px;
     left: 0;
     right: 0;
     display: flex;
