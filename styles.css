@@ -261,7 +261,7 @@ body::after {
 
 @media (max-width: 768px) {
   body::after {
-    background-position: center 62%;
+    background-position: center 68%;
   }
 }
 
@@ -557,21 +557,20 @@ body::after {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding-top: 80px;
+  justify-content: flex-start;
+  padding-top: 108px;
   padding-bottom: 48px;
   overflow: visible;
   background: transparent;
 }
 
-/* Desktop: CTA button flows directly below h1, group is centered in hero */
+/* Desktop: CTA button pinned to absolute center of hero */
 @media (min-width: 769px) {
   .hero-cta-center {
-    position: relative;
-    top: auto;
-    left: auto;
-    transform: none;
-    margin-top: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 
@@ -1302,7 +1301,7 @@ body::after {
   /* Hero */
   .hero { padding-top: 100px; padding-bottom: 60px; gap: 0; justify-content: flex-start; }
   .hero h1 { font-size: clamp(38px, 10vw, 52px); letter-spacing: -1.5px; }
-  .hero-bottom { bottom: 20px; }
+  .hero-bottom { bottom: 8px; }
   .hero-subtitle { font-size: 12px; }
   .btn-cta { padding: 13px 32px; font-size: 15px; }
   /* On mobile, btn-cta stays in flow after h1 */
@@ -1311,7 +1310,7 @@ body::after {
   /* Stat cards row — absolute, side by side, below airplane */
   .stat-cards-row {
     position: absolute;
-    bottom: 120px;
+    bottom: 80px;
     left: 0;
     right: 0;
     display: flex;
@@ -2269,6 +2268,12 @@ body::after {
 .is-light .faq-item:hover { border-color: rgba(4,155,211,0.4); }
 .is-light .faq-q { color: rgba(0,0,0,0.80); }
 .is-light .faq-a p { color: rgba(0,0,0,0.55); }
+.is-light .faq-title {
+  background: linear-gradient(135deg, #049BD3 0%, #39FF8E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
 @media (max-width: 600px) {
   .faq-section { padding: 60px 16px 80px; }
