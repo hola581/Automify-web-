@@ -259,6 +259,12 @@ body::after {
   translate: var(--plane-tx, 0px) var(--plane-ty, 0px);
 }
 
+@media (max-width: 768px) {
+  body::after {
+    background-position: center 62%;
+  }
+}
+
 @media (max-width: 600px) {
   body::after {
     animation: planeEntryMobile 2.4s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -551,20 +557,21 @@ body::after {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding-top: 108px;
+  justify-content: center;
+  padding-top: 80px;
   padding-bottom: 48px;
   overflow: visible;
   background: transparent;
 }
 
-/* Desktop: CTA button pinned to absolute center of hero */
+/* Desktop: CTA button flows directly below h1, group is centered in hero */
 @media (min-width: 769px) {
   .hero-cta-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-top: 20px;
   }
 }
 
