@@ -594,7 +594,7 @@ body::after {
 /* Hero text */
 .hero-content {
   text-align: center;
-  max-width: 780px;
+  max-width: 92vw;
   padding: 0 24px;
 }
 
@@ -624,7 +624,7 @@ body::after {
 
 .hero h1 {
   font-family: 'Creato Display', 'Inter', sans-serif;
-  font-size: clamp(42px, 4.8vw, 62px);
+  font-size: clamp(42px, 6.8vw, 110px);
   font-weight: 800;
   line-height: 1.06;
   letter-spacing: -2.5px;
@@ -2802,8 +2802,8 @@ body::after {
   .nav-container { max-width: none; padding: 0 52px; }
 
   /* ── Hero heading ── */
-  .hero h1       { font-size: clamp(52px, 5.5vw, 80px); }
-  .hero-content  { max-width: min(88vw, 1140px); }
+  .hero h1       { font-size: clamp(52px, 6.8vw, 110px); }
+  .hero-content  { max-width: 92vw; }
 
   /* ── Promo section ── */
   .promo-inner   { max-width: min(88vw, 1340px); }
